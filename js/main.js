@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Helper: Get Category Name
 function getCategoryName(cat) {
     const names = {
-        'bicycles': 'Велосипеды',
+        'bicycles': 'Электровелосипеды',
         'electro_scooters': 'Электросамокаты',
         'electro_bikes': 'Электробайки',
         'accessories': 'Аксессуары',
@@ -720,13 +720,30 @@ function getYoutubeId(url) {
 }
 
 // Рендер детальной страницы (или модалки)
+// Глобальные переменные для галереи изображений
+let currentImageIndex = 0;
+let productImages = [];
+
 function renderProductPage(product, container, isModal = false) {
     const images = product.images && product.images.length > 0 ? product.images : [product.image];
+    productImages = images; // Сохраняем для навигации
+    currentImageIndex = 0;
+    
     const thumbnailsHtml = images.map((img, index) => `
-        <div class="cursor-pointer border-2 ${index === 0 ? 'border-blue-500' : 'border-transparent'} hover:border-blue-500 rounded overflow-hidden aspect-square" onclick="changeMainImage(this, '${img}')">
+        <div class="cursor-pointer border-2 ${index === 0 ? 'border-blue-500' : 'border-transparent'} hover:border-blue-500 rounded overflow-hidden aspect-square" onclick="changeMainImage(this, '${img}', ${index})">
             <img src="${img}" class="w-full h-full object-cover">
         </div>
     `).join('');
+    
+    // Стрелки навигации (показываем только если больше 1 фото)
+    const arrowsHtml = images.length > 1 ? `
+        <button onclick="prevImage()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition z-10">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button onclick="nextImage()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 rounded-full p-2 shadow-lg transition z-10">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    ` : '';
 
     // Таблица технических характеристик
     let specsTableHtml = '';
@@ -855,6 +872,7 @@ function renderProductPage(product, container, isModal = false) {
                 <!-- Left: Images -->
                 <div class="mb-8 lg:mb-0">
                     <div class="relative bg-white border border-gray-100 rounded-lg overflow-hidden mb-4 group">
+                        ${arrowsHtml}
                         <img id="main-product-image-${isModal ? 'modal' : 'page'}" src="${images[0]}" class="w-full h-auto object-contain max-h-[500px]" alt="${product.title}">
                     </div>
                     
@@ -908,12 +926,17 @@ function renderProductPage(product, container, isModal = false) {
 }
 
 // Смена главного изображения
-function changeMainImage(thumb, src) {
+function changeMainImage(thumb, src, index = null) {
     const mainImgPage = document.getElementById('main-product-image-page');
     const mainImgModal = document.getElementById('main-product-image-modal');
     
     if (mainImgPage) mainImgPage.src = src;
     if (mainImgModal) mainImgModal.src = src;
+    
+    // Обновляем индекс если передан
+    if (index !== null) {
+        currentImageIndex = index;
+    }
     
     const thumbnails = thumb.parentElement.children;
     for (let t of thumbnails) {
@@ -924,6 +947,58 @@ function changeMainImage(thumb, src) {
     thumb.classList.add('border-blue-500');
 }
 window.changeMainImage = changeMainImage;
+
+// Навигация по изображениям - предыдущее
+function prevImage() {
+    if (productImages.length <= 1) return;
+    
+    currentImageIndex--;
+    if (currentImageIndex < 0) {
+        currentImageIndex = productImages.length - 1;
+    }
+    
+    updateMainImage();
+}
+window.prevImage = prevImage;
+
+// Навигация по изображениям - следующее
+function nextImage() {
+    if (productImages.length <= 1) return;
+    
+    currentImageIndex++;
+    if (currentImageIndex >= productImages.length) {
+        currentImageIndex = 0;
+    }
+    
+    updateMainImage();
+}
+window.nextImage = nextImage;
+
+// Обновление главного изображения и миниатюр
+function updateMainImage() {
+    const mainImgPage = document.getElementById('main-product-image-page');
+    const mainImgModal = document.getElementById('main-product-image-modal');
+    
+    const src = productImages[currentImageIndex];
+    
+    if (mainImgPage) mainImgPage.src = src;
+    if (mainImgModal) mainImgModal.src = src;
+    
+    // Обновляем выделение миниатюр
+    const thumbnailContainers = document.querySelectorAll('.grid.grid-cols-4.gap-4');
+    thumbnailContainers.forEach(container => {
+        const thumbnails = container.children;
+        for (let i = 0; i < thumbnails.length; i++) {
+            if (i === currentImageIndex) {
+                thumbnails[i].classList.remove('border-transparent');
+                thumbnails[i].classList.add('border-blue-500');
+            } else {
+                thumbnails[i].classList.remove('border-blue-500');
+                thumbnails[i].classList.add('border-transparent');
+            }
+        }
+    });
+}
 
 // Переключение таблицы характеристик
 function toggleSpecsTable(button) {
@@ -1245,7 +1320,7 @@ function setupCategorySelect() {
         // Заполняем опции
         const categories = [
             { value: 'all', name: 'Все категории' },
-            { value: 'bicycles', name: 'Велосипеды' },
+            { value: 'bicycles', name: 'Электровелосипеды' },
             { value: 'electro_scooters', name: 'Электросамокаты' },
             { value: 'electro_bikes', name: 'Электробайки' },
             { value: 'accessories', name: 'Аксессуары' },
@@ -1280,7 +1355,7 @@ function setupMobileFilters() {
         if (mobileCategorySelect) {
             const categories = [
                 { value: 'all', name: 'Все категории' },
-                { value: 'bicycles', name: 'Велосипеды' },
+                { value: 'bicycles', name: 'Электровелосипеды' },
                 { value: 'electro_scooters', name: 'Электросамокаты' },
                 { value: 'electro_bikes', name: 'Электробайки' },
                 { value: 'accessories', name: 'Аксессуары' },

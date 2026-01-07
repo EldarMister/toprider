@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://topriding.kg/sitemap.xml
+
+# Disallow admin panel
+Disallow: /admin.html

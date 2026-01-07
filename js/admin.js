@@ -242,8 +242,8 @@ function handleFileUpload(event) {
 }
 window.handleFileUpload = handleFileUpload;
 
-// Сжатие изображения
-function compressImage(base64, filename, maxWidth = 1920, quality = 0.85) {
+// Сжатие изображения (улучшенное качество)
+function compressImage(base64, filename, maxWidth = 4000, quality = 0.98) {
     return new Promise((resolve) => {
         const img = new Image();
         img.onload = function() {
@@ -251,7 +251,11 @@ function compressImage(base64, filename, maxWidth = 1920, quality = 0.85) {
             let width = img.width;
             let height = img.height;
             
-            // Уменьшаем размер если слишком большой
+            // Определяем формат изображения по расширению файла
+            const isPng = filename.toLowerCase().endsWith('.png') || base64.startsWith('data:image/png');
+            const format = isPng ? 'image/png' : 'image/jpeg';
+            
+            // Уменьшаем размер только если действительно очень большой
             if (width > maxWidth) {
                 height = (height * maxWidth) / width;
                 width = maxWidth;
@@ -261,14 +265,21 @@ function compressImage(base64, filename, maxWidth = 1920, quality = 0.85) {
             canvas.height = height;
             
             const ctx = canvas.getContext('2d');
+            
+            // Улучшаем качество рендеринга
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            
             ctx.drawImage(img, 0, 0, width, height);
             
-            // Конвертируем обратно в base64 с качеством
-            const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+            // Конвертируем обратно в base64 с максимальным качеством
+            const compressedBase64 = format === 'image/png' 
+                ? canvas.toDataURL('image/png') // PNG без сжатия
+                : canvas.toDataURL('image/jpeg', quality); // JPEG с высоким качеством
             resolve(compressedBase64);
         };
         img.onerror = function() {
-            // Если не удалось сжать, возвращаем оригинал
+            // Если не удалось обработать, возвращаем оригинал
             resolve(base64);
         };
         img.src = base64;
