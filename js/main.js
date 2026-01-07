@@ -358,8 +358,26 @@ if (searchInput) {
     });
 }
 
+const searchInputMobile = document.getElementById('search-input-mobile');
+if (searchInputMobile) {
+    searchInputMobile.addEventListener('input', (e) => {
+        filterState.search = e.target.value.toLowerCase();
+        applyFilters();
+    });
+}
+
 function handleSearch() {
-   applyFilters(); // Вызывается кнопкой лупы, хотя input event уже делает это
+    // Получаем значение из десктопного или мобильного поля поиска
+    const desktopInput = document.getElementById('search-input-desktop');
+    const mobileInput = document.getElementById('search-input-mobile');
+    
+    if (desktopInput && desktopInput.value) {
+        filterState.search = desktopInput.value.toLowerCase();
+    } else if (mobileInput && mobileInput.value) {
+        filterState.search = mobileInput.value.toLowerCase();
+    }
+    
+    applyFilters();
 }
 window.handleSearch = handleSearch;
 

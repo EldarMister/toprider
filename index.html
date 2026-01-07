@@ -124,7 +124,7 @@
         <div class="container-custom flex flex-col lg:flex-row justify-between items-center gap-4">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div class="text-3xl font-black text-[#002855] tracking-tighter italic">TOPRIDING<span class="text-red-600">.KG</span></div>
+                <div onclick="showCatalog()" class="text-3xl font-black text-[#002855] tracking-tighter italic cursor-pointer hover:opacity-80 transition">TOPRIDING<span class="text-red-600">.KG</span></div>
             </div>
             
             <!-- Contacts (Visible on mobile now) -->
@@ -155,7 +155,7 @@
                     <li onclick="filterByCategory('electro_scooters')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
                     <li onclick="filterByCategory('accessories')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Аксессуары ▼</li>
                     <li onclick="filterByCategory('winter')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Зимние товары ▼</li>
-                    <li class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
+                    <li onclick="showCatalog()" class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
                     <li onclick="openCart()" class="px-5 py-4 flex items-center gap-2 bg-[#001a38] cursor-pointer hover:bg-[#001529] transition">🛒 <span id="cart-count">0</span> ТОВАРОВ</li>
                 </ul>
                 <div class="flex h-10 my-2">
@@ -171,8 +171,8 @@
                 </button>
                 
                 <div class="flex flex-1 mx-4">
-                    <input type="text" placeholder="Поиск..." class="w-full px-3 py-2 text-sm outline-none rounded-l-sm italic text-black">
-                    <button class="bg-[#4d4d4d] px-3 text-white rounded-r-sm">🔍</button>
+                    <input type="text" id="search-input-mobile" placeholder="Поиск..." class="w-full px-3 py-2 text-sm outline-none rounded-l-sm italic text-black" onkeypress="if(event.key === 'Enter') handleSearch()">
+                    <button onclick="handleSearch()" class="bg-[#4d4d4d] px-3 text-white rounded-r-sm">🔍</button>
                 </div>
 
                 <a href="#" onclick="event.preventDefault(); openCart();" class="text-white p-2 relative">
@@ -184,11 +184,11 @@
             <!-- Mobile Menu Dropdown -->
             <div id="mobileMenu" class="hidden lg:hidden border-t border-[#ffffff20] pb-4">
                 <ul class="flex flex-col text-white text-[14px] font-bold uppercase">
-                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Велосипеды</li>
-                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Электросамокаты</li>
-                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Аксессуары</li>
-                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Зимние товары</li>
-                    <li class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42]">Рассрочка</li>
+                    <li onclick="filterByCategory('bicycles'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Велосипеды</li>
+                    <li onclick="filterByCategory('electro_scooters'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
+                    <li onclick="filterByCategory('accessories'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Аксессуары</li>
+                    <li onclick="filterByCategory('winter'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Зимние товары</li>
+                    <li onclick="showCatalog(); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
                 </ul>
             </div>
         </div>
