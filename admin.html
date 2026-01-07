@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель TOPRIDING.KG</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #f3f4f6; }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar & Content Layout -->
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- Sidebar -->
+        <div class="w-64 bg-[#002855] text-white flex flex-col">
+            <div class="p-6 text-2xl font-black italic border-b border-blue-900">
+                TOPRIDING<span class="text-red-500">.KG</span>
+                <div class="text-xs font-normal not-italic text-gray-400 mt-1">Панель управления</div>
+            </div>
+            <nav class="flex-1 overflow-y-auto py-4">
+                <a href="#" onclick="showSection('list')" class="block px-6 py-3 hover:bg-blue-900 transition flex items-center gap-3">
+                    📦 Товары
+                </a>
+                <a href="#" onclick="showSection('add')" class="block px-6 py-3 hover:bg-blue-900 transition flex items-center gap-3">
+                    ➕ Добавить товар
+                </a>
+                <a href="index.html" target="_blank" class="block px-6 py-3 hover:bg-blue-900 transition flex items-center gap-3 text-yellow-400">
+                    🔗 Перейти на сайт
+                </a>
+            </nav>
+            <div class="p-4 border-t border-blue-900">
+                <button onclick="downloadData()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 rounded transition flex items-center justify-center gap-2">
+                    💾 Сохранить изменения
+                </button>
+                <p class="text-[10px] text-gray-400 mt-2 text-center">Скачает новый products.js</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            
+            <!-- Product List Section -->
+            <div id="section-list">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-800">Список товаров</h2>
+                    <div class="text-sm text-gray-500">Всего товаров: <span id="total-count" class="font-bold">0</span></div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Фото</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Название</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Категория</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Цена</th>
+                                <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-table-body" class="bg-white divide-y divide-gray-200">
+                            <!-- Rows rendered by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add/Edit Product Section -->
+            <div id="section-add" class="hidden">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6" id="form-title">Добавить товар</h2>
+                
+                <form id="product-form" class="bg-white rounded-lg shadow p-6 max-w-2xl">
+                    <input type="hidden" id="edit-id">
+                    
+                    <div class="grid grid-cols-1 gap-6">
+                        <!-- Основное -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Название товара</label>
+                            <input type="text" id="inp-title" required class="w-full border border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Категория</label>
+                                <select id="inp-category" class="w-full border border-gray-300 rounded-md p-2">
+                                    <option value="electro_bikes">Электровелосипеды</option>
+                                    <option value="electro_scooters">Электросамокаты</option>
+                                    <option value="bicycles">Велосипеды</option>
+                                    <option value="accessories">Аксессуары</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Бренд</label>
+                                <input type="text" id="inp-brand" class="w-full border border-gray-300 rounded-md p-2">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Цена (сом)</label>
+                                <input type="number" id="inp-price" required class="w-full border border-gray-300 rounded-md p-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Старая цена (необяз.)</label>
+                                <input type="number" id="inp-oldPrice" class="w-full border border-gray-300 rounded-md p-2">
+                            </div>
+                        </div>
+
+                        <!-- Изображения -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Фотографии товара</label>
+                            
+                            <!-- Загрузка из галереи -->
+                            <div class="mb-3">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Загрузить из галереи устройства</label>
+                                <input type="file" id="file-upload" accept="image/*" multiple class="hidden" onchange="handleFileUpload(event)">
+                                <button type="button" onclick="document.getElementById('file-upload').click()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition flex items-center justify-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    Выбрать фото из галереи
+                                </button>
+                                <p class="text-xs text-gray-500 mt-1">Можно выбрать несколько фотографий одновременно</p>
+                                <p class="text-xs text-yellow-600 mt-1 font-medium">⚠️ Рекомендуется: сжимайте фото перед загрузкой (до 2MB каждое). Изображения автоматически оптимизируются.</p>
+                            </div>
+                            
+                            <div class="border-t pt-3 mb-3">
+                                <p class="text-xs text-gray-500 mb-2">Или вставьте ссылку на фото:</p>
+                                <div id="images-container" class="space-y-2 mb-2">
+                                    <!-- Изображения будут добавлены динамически -->
+                                </div>
+                                <button type="button" onclick="addImageField()" class="text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded border border-gray-300">
+                                    + Добавить фото по ссылке
+                                </button>
+                            </div>
+                            
+                            <p class="text-xs text-gray-500">Первое фото будет основным</p>
+                            
+                            <label class="block text-sm font-medium text-gray-700 mb-1 mt-4">Ссылка на YouTube (необязательно)</label>
+                            <input type="url" id="inp-video" placeholder="https://youtu.be/..." class="w-full border border-gray-300 rounded-md p-2">
+                            <p class="text-xs text-gray-500">Вставьте ссылку на видео, и оно появится в карточке товара</p>
+                        </div>
+
+                        <!-- Характеристики для карточки -->
+                        <div class="border-t pt-4">
+                            <h3 class="text-md font-bold text-gray-900 mb-3">Основные характеристики (для карточки товара)</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" id="spec-motor" placeholder="Мотор (напр. 500W)" class="border p-2 rounded">
+                                <input type="text" id="spec-speed" placeholder="Скорость (напр. 45КМ/Ч)" class="border p-2 rounded">
+                                <input type="text" id="spec-battery" placeholder="Аккумулятор (напр. 48V 15AH)" class="border p-2 rounded">
+                                <input type="text" id="spec-range" placeholder="Запас хода (напр. 40КМ)" class="border p-2 rounded">
+                            </div>
+                        </div>
+
+                        <!-- Полная таблица технических характеристик -->
+                        <div class="border-t pt-4">
+                            <h3 class="text-md font-bold text-gray-900 mb-3">Полная таблица технических характеристик</h3>
+                            <p class="text-xs text-gray-500 mb-3">Эти данные будут отображаться в таблице "ДЕТАЛИ" на странице товара</p>
+                            
+                            <div class="space-y-3">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" id="fullspec-battery" placeholder="🔋 Батарея (напр. 72V60A)" class="border p-2 rounded">
+                                    <input type="text" id="fullspec-motor" placeholder="⚡ Мощность двигателя (напр. 3200Вт)" class="border p-2 rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" id="fullspec-peakPower" placeholder="♨ Пиковая мощность (напр. 10000Вт)" class="border p-2 rounded">
+                                    <input type="text" id="fullspec-speed" placeholder="🔝 Максимальная скорость (напр. 105км/ч)" class="border p-2 rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" id="fullspec-range" placeholder="⛽ Запас хода (напр. до 200км)" class="border p-2 rounded">
+                                    <input type="text" id="fullspec-brakes" placeholder="🔗 Тормоза (напр. гидравлические)" class="border p-2 rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" id="fullspec-wheels" placeholder="🛞 Колеса (напр. 11 дюймовые)" class="border p-2 rounded">
+                                    <input type="text" id="fullspec-suspension" placeholder="♾ Амортизаторы (напр. Регулируемые)" class="border p-2 rounded">
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <input type="text" id="fullspec-maxLoad" placeholder="🔢 Максимальная нагрузка (напр. 150кг)" class="border p-2 rounded">
+                                    <input type="text" id="fullspec-chargeTime" placeholder="🕕 Время зарядки (напр. 6 часов)" class="border p-2 rounded">
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-4 border-t">
+                                <h4 class="text-sm font-bold text-gray-700 mb-3">Дополнительные опции</h4>
+                                <div class="space-y-2">
+                                    <input type="text" id="fullspec-steeringDamper" placeholder="🪄 Рулевой демфер" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-alarm" placeholder="🔒 Сигнализация" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-gps" placeholder="🖲 GPS" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-display" placeholder="📟 Дисплей (напр. 4дюймовый TFT)" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-lighting" placeholder="🔥 Подсветка (напр. руля, деки)" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-turnSignals" placeholder="↔ Поворотники" class="border p-2 rounded w-full">
+                                    <input type="text" id="fullspec-emergencyLights" placeholder="🚨 Аварийки" class="border p-2 rounded w-full">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Описание -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Описание (HTML поддерживается)</label>
+                            <textarea id="inp-description" rows="4" class="w-full border border-gray-300 rounded-md p-2"></textarea>
+                        </div>
+
+                        <div class="flex gap-4 pt-4">
+                            <button type="submit" class="flex-1 bg-blue-600 text-white font-bold py-2 rounded hover:bg-blue-700">Сохранить товар</button>
+                            <button type="button" onclick="showSection('list')" class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50">Отмена</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Load Data -->
+    <script src="data/products.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOPRIDING.KG — Магазин велосипедов в Бишкеке</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Roboto', sans-serif; color: #333; overflow-x: hidden; }
+        .container-custom { max-width: 1200px; margin: 0 auto; padding: 0 15px; width: 100%; }
+        /* Mobile fixes */
+        img { max-width: 100%; height: auto; }
+        
+        /* Grid for products - MAIN GRID CONTAINER */
+        #products-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 0.75rem !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        /* Product card is a direct child of grid */
+        #products-grid .product-card {
+            display: flex !important;
+            flex-direction: column !important;
+            background-color: white;
+            overflow: hidden;
+            height: auto;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 0.5rem !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
+            min-width: 0 !important;
+            max-width: 100% !important;
+            width: 100% !important;
+            grid-column: span 1 !important;
+            margin: 0 !important;
+            box-sizing: border-box !important;
+        }
+        
+        /* Reset width for inner content */
+        #products-grid .product-card > * {
+            width: auto;
+            max-width: 100%;
+        }
+        
+        /* Banner spans full width of grid */
+        #products-grid .col-span-full {
+            grid-column: 1 / -1 !important;
+            width: 100% !important;
+            margin: 0 !important;
+            display: block !important;
+        }
+        
+        @media (max-width: 640px) {
+            .container-custom { padding: 0 10px; }
+            /* Убеждаемся, что родительский контейнер не ограничивает ширину */
+            .lg\:grid {
+                display: block !important;
+            }
+            .lg\:grid > .flex-1 {
+                width: 100% !important;
+                max-width: 100% !important;
+                display: block !important;
+            }
+            /* Принудительно применяем grid на мобильных - 2 колонки */
+            #products-grid {
+                gap: 0.5rem !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                display: grid !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+            #products-grid .product-card {
+                border: 1px solid #e5e7eb !important;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+                width: 100% !important;
+                min-width: 0 !important;
+                max-width: 100% !important;
+            }
+            #products-grid .col-span-full {
+                grid-column: 1 / -1 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0.5rem 0 !important;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 1023px) {
+            #products-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+                gap: 1rem !important;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            #products-grid {
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 1.5rem !important;
+            }
+        }
+        
+        /* Стили для таблицы технических характеристик */
+        .specs-table-content table {
+            border-collapse: collapse;
+        }
+        .specs-table-content td {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .specs-table-content tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="bg-white w-full">
+
+    <header class="py-4 border-b border-gray-100">
+        <div class="container-custom flex flex-col lg:flex-row justify-between items-center gap-4">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="text-3xl font-black text-[#002855] tracking-tighter italic">TOPRIDING<span class="text-red-600">.KG</span></div>
+            </div>
+            
+            <!-- Contacts (Visible on mobile now) -->
+            <div class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
+                <div class="text-center">
+                    <div class="text-red-500 text-xl mb-1">📍</div>
+                    <p>Бишкек,<br>Каралаева 40/4</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-red-500 text-xl mb-1">📞</div>
+                    <a href="tel:0508708408" class="block">0508 708 408</a>
+                </div>
+                <!-- WhatsApp Icon Removed as requested -->
+                <div class="text-center lg:border-l lg:pl-10">
+                    <div class="text-red-500 text-xl mb-1">🕒</div>
+                    <p>Ежедневно:<br>11:00 - 19:00</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-[#002855] border-t-4 border-[#FFD700] sticky top-0 z-40 shadow-md">
+        <div class="container-custom">
+            <!-- Desktop Nav -->
+            <div class="hidden lg:flex justify-between items-center">
+                <ul class="flex flex-wrap text-white text-[12px] font-bold uppercase">
+                    <li onclick="filterByCategory('bicycles')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Велосипеды ▼</li>
+                    <li onclick="filterByCategory('electro_scooters')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
+                    <li onclick="filterByCategory('accessories')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Аксессуары ▼</li>
+                    <li onclick="filterByCategory('winter')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Зимние товары ▼</li>
+                    <li class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
+                    <li onclick="openCart()" class="px-5 py-4 flex items-center gap-2 bg-[#001a38] cursor-pointer hover:bg-[#001529] transition">🛒 <span id="cart-count">0</span> ТОВАРОВ</li>
+                </ul>
+                <div class="flex h-10 my-2">
+                    <input type="text" id="search-input-desktop" placeholder="Поиск..." class="px-4 py-1 text-sm outline-none w-64 italic text-black">
+                    <button onclick="handleSearch()" class="bg-[#4d4d4d] px-4 text-white hover:bg-black transition">🔍</button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Bar -->
+            <div class="flex lg:hidden justify-between items-center py-2">
+                <button id="mobileMenuBtn" class="text-white p-2 focus:outline-none">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+                
+                <div class="flex flex-1 mx-4">
+                    <input type="text" placeholder="Поиск..." class="w-full px-3 py-2 text-sm outline-none rounded-l-sm italic text-black">
+                    <button class="bg-[#4d4d4d] px-3 text-white rounded-r-sm">🔍</button>
+                </div>
+
+                <a href="#" onclick="event.preventDefault(); openCart();" class="text-white p-2 relative">
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <span id="cart-count-mobile" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobileMenu" class="hidden lg:hidden border-t border-[#ffffff20] pb-4">
+                <ul class="flex flex-col text-white text-[14px] font-bold uppercase">
+                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Велосипеды</li>
+                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Электросамокаты</li>
+                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Аксессуары</li>
+                    <li class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42]">Зимние товары</li>
+                    <li class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42]">Рассрочка</li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content" class="bg-white pb-12 pt-8">
+        <!-- Catalog Page -->
+        <div id="catalog-page" class="container-custom">
+            <!-- Title & Breadcrumbs -->
+            <div class="mb-10 text-center">
+                <h1 class="text-4xl font-bold text-gray-900">Велосипеды</h1>
+                <div class="mt-3 flex justify-center gap-2 text-sm text-gray-500">
+                    <a href="#" class="hover:text-gray-900">Главная</a>
+                    <span>/</span>
+                    <a href="#" class="hover:text-gray-900">Каталог товаров</a>
+                    <span>/</span>
+                    <span class="text-gray-900">Велосипеды</span>
+                </div>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-[280px_1fr] lg:gap-12">
+                <!-- Sidebar -->
+                <aside class="hidden space-y-10 lg:block">
+                    <!-- Type -->
+                    <div>
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Тип</h3>
+                        <div class="relative">
+                            <select class="w-full appearance-none rounded border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-500 focus:border-blue-500 focus:outline-none">
+                                <option>Выбрать категорию</option>
+                            </select>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price -->
+                    <div id="filter-price">
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Цена</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 0, 1000000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">Все цены</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 1000, 5000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">1000 сом - 5000 сом</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 5000, 10000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">5000 сом - 10000 сом</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 10000, 20000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">10000 сом - 20000 сом</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 20000, 40000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">20000 сом - 40000 сом</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 40000, 80000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">40000 сом - 80000 сом</span>
+                            </label>
+                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 80000, 1000000)">
+                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                                </span>
+                                <span class="text-sm text-gray-600">80000 сом +</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Frame Size (Пока отключен, так как нет данных в products.js) -->
+                    <!-- 
+                    <div id="filter-frame">
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Размер рамы:</h3> 
+                        ...
+                    </div>
+                    -->
+
+                    <!-- Gender (Пока отключен) -->
+                    <!--
+                    <div>
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Пол</h3>
+                        ...
+                    </div>
+                    -->
+
+                    <!-- Max Speed -->
+                    <div id="filter-speed">
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Макс. скорость(км/час)</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 25)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">25 км/ч</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 35)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">35 км/ч</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 45)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">45 км/ч</span>
+                                </div>
+                            </label>
+                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 55)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">55 км/ч</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Motor Power -->
+                    <div id="filter-motor">
+                        <h3 class="mb-4 text-base font-bold text-gray-900">Мощность мотора(ватт)</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 250)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">250W</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 350)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">350W</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 500)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">500W</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 750)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">750W</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 1000)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">1000W</span>
+                                </div>
+                            </label>
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 1500)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">1500W</span>
+                                </div>
+                            </label>
+                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 2000)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">2000W</span>
+                                </div>
+                            </label>
+                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 3000)">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    </div>
+                                    <span class="text-sm text-gray-600">3000W</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="flex-1 w-full">
+
+                    <!-- Description -->
+                    <p class="mb-8 text-sm leading-relaxed text-gray-500">
+                        Мы предлагаем велосипеды в Бишкеке от проверенных брендов, таких как Trinx, Galaxy, Gestalt, Forever, Phoneix, SameBike, Phillips и многие другие. В нашем ассортименте также имеются запчасти и разнообразные аксессуары для вашего велосипеда.
+                    </p>
+
+                    <!-- Toolbar -->
+                    <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-gray-900">Велосипеды</span>
+                            <span class="text-sm text-gray-400 pl-2 border-l border-gray-300 ml-2">Showing 1–12 Products of 159 Products</span>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="flex gap-2">
+                                <button class="text-[#00c2c2] hover:text-[#00a0a0]">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                </button>
+                                <button class="text-gray-400 hover:text-gray-600">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-sm font-bold text-gray-900">Показывать:</span>
+                                    <select class="rounded border border-gray-200 bg-white py-1 pl-2 pr-6 text-sm text-gray-600 focus:outline-none">
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <select class="rounded border border-gray-200 bg-white py-1 pl-2 pr-8 text-sm text-gray-600 focus:outline-none">
+                                        <option>По новизне</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Categories Navigation Grid -->
+                    <div id="categories-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-8 w-full">
+                        <!-- Велосипеды -->
+                        <div onclick="filterByCategory('bicycles')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/2c3e50/ffffff?text=Bicycles');"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Велосипеды</h3>
+                            </div>
+                        </div>
+
+                        <!-- Электросамокаты -->
+                        <div onclick="filterByCategory('electro_scooters')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGT55pkYMjzqshVFvtMw7cgQPTPcpVm6lOAQ&s');"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электросамокаты</h3>
+                            </div>
+                        </div>
+
+                        <!-- Электробайки -->
+                        <div onclick="filterByCategory('electro_bikes')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://formand.ru/image/cache/data/electric-scooters/caigiees-harley-max/elektrobayk-caigiees-harley-max-foto-01-1000x750.jpg');"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электробайки</h3>
+                            </div>
+                        </div>
+
+                        <!-- Аксессуары -->
+                        <div onclick="filterByCategory('accessories')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://placehold.co/600x400/eee/333?text=Accessories');"></div>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Аксессуары</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid Container -->
+                    <div id="products-grid">
+                        <!-- Товары будут загружены через JS -->
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="mt-12 flex items-center justify-center gap-2">
+                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-[#00a0a0] text-sm font-bold text-white">1</a>
+                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">2</a>
+                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">3</a>
+                        <span class="flex h-10 w-10 items-center justify-center text-sm text-gray-400">...</span>
+                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">13</a>
+                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">14</a>
+                        <a href="#" class="ml-4 text-sm font-bold text-[#00a0a0] hover:text-[#008080] uppercase">СЛЕДУЮЩИЙ</a>
+                    </div>
+
+                    <!-- SEO Text -->
+                    <div class="mt-16 space-y-8 text-gray-600">
+                        <p class="text-sm leading-relaxed">
+                            Активный ритм жизни современного человека — удачное сочетание здоровья, динамики и множества свершений! Велосипед позволяет вам покорять новые горизонты, чувствовать себя жизнерадостным и уверенным. Участвуйте в спортивных мероприятиях, совершайте неспешные путешествия, выезжайте на природу и устраивайте увлекательные гонки с друзьями на двухколесном транспорте.
+                        </p>
+
+                        <div>
+                            <h2 class="mb-4 text-2xl font-bold text-gray-900">TOPRIDING.KG — интернет-магазин велосипедов, которому доверяют в Бишкеке!</h2>
+                            <p class="mb-4 text-sm leading-relaxed">
+                                Мы предлагаем огромный выбор велосипедов от проверенных брендов, таких как Trinx, Galaxy, Gestalt, Forever, Phoneix, SameBike и многие другие. В нашем ассортименте также имеются запчасти и разнообразные аксессуары для вашего велосипеда.
+                            </p>
+                            <p class="text-sm leading-relaxed">
+                                У нас есть собственная веломастерская, где вы можете получить профессиональное обслуживание, включая гарантийный и послегарантийный ремонт. Наша команда специалистов уделяет внимание каждому клиенту и его потребностям, обеспечивая высокий уровень сервиса на всех этапах, начиная от выбора велосипеда (стиль катания, подходящий размер рамы, бюджет) и заканчивая оперативной доставкой по всему городу.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h3 class="mb-4 text-xl font-bold text-gray-900">Основные категории велосипедов в TOPRIDING.KG:</h3>
+                            <ul class="list-inside list-disc space-y-2 text-sm">
+                                <li><span class="font-bold">Детские велосипеды:</span> Модели классифицируются по диаметру колес, также есть двух- и трехколесные велосипеды. Для самых маленьких предлагаем беговелы.</li>
+                                <li><span class="font-bold">Велосипеды для взрослых:</span> Широкий выбор удобных и современных моделей для мужчин и женщин различных возрастов.</li>
+                                <li><span class="font-bold">Горные велосипеды:</span> Отличаются прочной рамой и амортизационной вилкой. Основные преимущества — надежность и устойчивость к неровностям.</li>
+                                <li><span class="font-bold">Складные велосипеды:</span> Удобны в хранении и транспортировке, имеют отличные ходовые характеристики и маневренность.</li>
+                                <li><span class="font-bold">Шоссейные велосипеды:</span> Идеальный выбор для тех, кто ценит скорость и эффективность на дорогах.</li>
+                                <li><span class="font-bold">Электровелосипеды:</span> С виду он похож обычный велосипед, но педалями двигать не нужно.</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="mb-4 text-xl font-bold text-gray-900">Преимущества работы с TOPRIDING.KG:</h3>
+                            <ul class="list-inside list-disc space-y-2 text-sm">
+                                <li>Опытные консультанты и механики, многие из которых являются активными велосипедистами.</li>
+                                <li>Большое разнообразие велосипедов для взрослых и детей, а также запчастей, одежды, инструментов и аксессуаров.</li>
+                                <li>Грамотные консультации, сборка и настройка велосипедов, высококвалифицированное послепродажное сопровождение.</li>
+                                <li>Доступные цены без наценок за счет прямого сотрудничества с производителями.</li>
+                                <li>Быстрая доставка по Бишкеку и всей Кыргызстану.</li>
+                                <li>Частые акции и скидки, позволяющие купить велосипед с выгодой.</li>
+                            </ul>
+                        </div>
+
+                        <p class="pt-4 text-sm font-medium text-gray-900">
+                            Ищите велосипеды в Бишкеке? Интернет-магазин велосипедов TOPRIDING.KG — ваш надежный попутчик в мир велосипедов!
+                        </p>
+
+                        <!-- Why TOPRIDING.KG Section -->
+                        <div class="mt-16 border-t border-gray-100 pt-12 pb-4">
+                            <h2 class="mb-12 text-center text-3xl font-bold text-[#5bc0de]">Почему TOPRIDING.KG?</h2>
+                            
+                            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
+                                <!-- Item 1 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="mb-4 text-[#ff4d4d]">
+                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.42 0 01-1.043 3.296 3.745 3.42 0 01-3.296 1.043A3.745 3.42 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.42 0 01-3.296-1.043 3.745 3.42 0 01-1.043-3.296A3.745 3.42 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.42 0 011.043-3.296 3.746 3.42 0 013.296-1.043A3.746 3.42 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.42 0 013.296 1.043 3.746 3.42 0 011.043 3.296A3.745 3.42 0 0121 12z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Полная гарантия</h3>
+                                    <p class="text-sm text-gray-500 max-w-[200px]">На проверку 2 недели и официальная гарантия от 3 до 12 месяцев.</p>
+                                </div>
+
+                                <!-- Item 2 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="mb-4 text-[#ff4d4d]">
+                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.75" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Бесплатная доставка</h3>
+                                    <p class="text-sm text-gray-500 max-w-[200px]">При покупке от 5 000 сом доставка в пределах Кыргызстана БЕСПЛАТНО.</p>
+                                </div>
+
+                                <!-- Item 3 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="mb-4 text-[#ff4d4d]">
+                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Самые низкие цены</h3>
+                                    <p class="text-sm text-gray-500 max-w-[200px]">Гарантируем самые низкие цены и самые лучшие условия.</p>
+                                </div>
+
+                                <!-- Item 4 -->
+                                <div class="flex flex-col items-center">
+                                    <div class="mb-4 text-[#ff4d4d]">
+                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.075m-1.726 4.415l-.944-4.635c-.06-.296-.448-.428-.703-.236l-.825.616M6.75 5.25a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z" />
+                                        </svg>
+                                    </div>
+                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Сервисный центр</h3>
+                                    <p class="text-sm text-gray-500 max-w-[200px]">Бесплатная сборка и настройка. Обслуживание и ремонт.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- End Catalog Page -->
+
+        <!-- Product Page -->
+        <div id="product-page" class="hidden">
+            <!-- Content will be injected by JS -->
+        </div>
+    </main>
+
+    <!-- Map and Articles Section -->
+    <section class="bg-gray-50 py-12">
+        <div class="container-custom">
+            <!-- Map -->
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Как нас найти?</h2>
+                <div class="w-full rounded-lg overflow-hidden shadow-lg h-[400px]">
+                    <iframe src="https://yandex.kg/map-widget/v1/?um=constructor%3A1afe1234567890&amp;source=constructor" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+
+            <!-- Articles Grid -->
+            <div class="mt-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-10 text-center">Статьи</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Article 1: Instructions -->
+                    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C6.5 6.253 2 10.998 2 17s4.5 10.747 10 10.747c5.5 0 10-4.998 10-10.747S17.5 6.253 12 6.253z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Инструкция</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Подробное руководство по выбору и использованию электросамокатов и велосипедов для начинающих пользователей.
+                            </p>
+                            <a href="#" class="inline-block text-blue-600 font-semibold hover:text-blue-800 text-sm">Читать дальше →</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 2: Recommendations -->
+                    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Рекомендации</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Советы от экспертов по выбору правильной техники в зависимости от ваших потребностей и стиля жизни.
+                            </p>
+                            <a href="#" class="inline-block text-blue-600 font-semibold hover:text-blue-800 text-sm">Читать дальше →</a>
+                        </div>
+                    </article>
+
+                    <!-- Article 3: News -->
+                    <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <div class="h-48 bg-gray-200 flex items-center justify-center">
+                            <svg class="w-20 h-20 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v4m6-4v10a2 2 0 01-2 2m0 0V5a2 2 0 012-2h-2.5A2.5 2.5 0 0013 2.5V4"></path>
+                            </svg>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3">Без рубрики. Новости</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">
+                                Свежие новости из мира электротранспорта, обновления нашего каталога и специальные предложения для вас.
+                            </p>
+                            <a href="#" class="inline-block text-blue-600 font-semibold hover:text-blue-800 text-sm">Читать дальше →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#F8F9FA] pt-12 pb-10 border-t border-gray-200">
+        <div class="container-custom flex flex-col lg:flex-row justify-between items-start lg:gap-10">
+            
+            <!-- Col 1: Contacts -->
+            <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none pb-4 lg:pb-0">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                    <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Наши контакты</h5>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
+                    <ul class="space-y-4 text-[14px] text-[#555]">
+                        <li class="flex items-start gap-3">🏠 Бишкек, Каралаева 40/4 (Южный парк)</li>
+                        <li class="flex items-center gap-3">📞 <a href="tel:0508708408" class="hover:text-[#66CC33]">0508 708 408</a></li>
+                        <li class="flex items-center gap-3">💬 <a href="https://wa.me/996508708408" class="hover:text-[#66CC33]">0508 708 408</a></li>
+                        <li class="flex items-center gap-3">✉️ sales@topriding.kg</li>
+                        <li class="flex items-start gap-3">🕒 Ежедневно: 11:00 - 19:00</li>
+                        <li class="flex items-center gap-3 pt-2 font-medium">🌐 <a href="https://topriding.kg" class="text-blue-500 hover:underline">topriding.kg</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Col 2: Company -->
+            <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none py-4 lg:py-0">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                    <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Компания</h5>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
+                    <ul class="space-y-3 text-[14px] text-[#555]">
+                        <li><a href="#" class="hover:text-[#66CC33] transition">О магазине</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Как купить</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Наши отзывы</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Каталог</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Рассрочка</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Прокат</a></li>
+                        <li><a href="#" class="hover:text-[#66CC33] transition">Веломастерская</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Col 3: Payment -->
+            <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none py-4 lg:py-0">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                    <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Принимаем к оплате</h5>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
+                    <div class="flex flex-col gap-2 max-w-[240px]">
+                        <a href="https://mbank.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                            <img src="assets/images/mbank.svg" alt="mBank" class="h-full w-full object-contain p-2">
+                        </a>
+                        <a href="https://optimabank.kg/ru/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                            <img src="assets/images/optima24.svg" alt="Optima24" class="h-full w-full object-contain p-2">
+                        </a>
+                        <div class="grid grid-cols-2 gap-2 h-[54px]">
+                            <a href="https://obank.kg/ru" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
+                                <img src="assets/images/o_m.svg" alt="О!Деньги" class="h-full w-full object-cover">
+                            </a>
+                            <a href="https://megapay.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
+                                <img src="assets/images/megapay.svg" alt="MegaPay" class="h-full w-full object-cover">
+                            </a>
+                        </div>
+                        <a href="https://balance.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                            <!-- Balance placeholder since SVG missing in list but requested -->
+                            <div class="h-full w-full flex items-center justify-center font-bold text-black text-xl bg-yellow-400">Balance</div>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-[12px] text-gray-400">А также, переводы и наличные</p>
+                </div>
+            </div>
+
+            <!-- Col 4: Socials -->
+            <div class="w-full lg:flex-1 py-4 lg:py-0">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                    <h5 class="font-bold text-[16px] text-[#333] mb-0 lg:mb-6 uppercase tracking-tight">Мы в соцсетях</h5>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div class="hidden lg:block mt-4 lg:mt-0 footer-content">
+                    <div class="grid grid-cols-4 gap-2 mb-8">
+                        <a href="#" class="w-9 h-9 bg-[#3B5998] rounded-full flex items-center justify-center text-white font-bold hover:opacity-80">f</a>
+                        <a href="#" class="w-9 h-9 bg-black rounded-full flex items-center justify-center text-white text-sm font-bold hover:opacity-80">𝕏</a>
+                        <a href="#" class="w-9 h-9 bg-[#0077B5] rounded-full flex items-center justify-center text-white text-xs hover:opacity-80">in</a>
+                        <a href="#" class="w-9 h-9 bg-[#E1306C] rounded-full flex items-center justify-center text-white text-lg italic hover:opacity-80">ig</a>
+                        <a href="#" class="w-9 h-9 bg-[#FF0084] rounded-full flex items-center justify-center text-white hover:opacity-80">•●</a>
+                        <a href="#" class="w-9 h-9 bg-[#FF6600] rounded-full flex items-center justify-center text-white hover:opacity-80">📡</a>
+                        <a href="#" class="w-9 h-9 bg-[#FF0000] rounded-full flex items-center justify-center text-white text-[8px] font-bold text-center leading-none hover:opacity-80">You<br>Tube</a>
+                    </div>
+                    
+                    <div class="bg-white border border-gray-100 p-3 rounded shadow-sm inline-block">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[12px] font-bold text-gray-400">Оценка в 2ГИС</span>
+                            <span class="bg-[#6ABC24] text-white px-2 py-0.5 rounded text-[13px] font-bold">4,9</span>
+                            <span class="text-yellow-400 text-lg">★★★★★</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Copyright from previous step -->
+        <div class="mt-12 border-t border-gray-200 pt-6 text-sm text-center text-gray-500">
+            TOPRIDING.KG © 2026 by Интернет магазин Все права защищены.
+        </div>
+    </footer>
+
+    <a href="https://wa.me/996508708408" class="fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" viewBox="0 0 16 16">
+            <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326z"/>
+        </svg>
+    </a>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeQuickView()"></div>
+
+            <!-- Modal panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full relative">
+                <button onclick="closeQuickView()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 z-10">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+                <div id="quick-view-content" class="bg-white">
+                    <!-- Content injected by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="cart-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <!-- Background overlay -->
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeCart()"></div>
+
+            <!-- Modal panel -->
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full relative max-h-[90vh] flex flex-col">
+                <!-- Header -->
+                <div class="bg-[#002855] px-6 py-4 flex items-center justify-between">
+                    <h2 class="text-xl font-bold text-white">Корзина (<span id="cart-modal-count">0</span>)</h2>
+                    <button onclick="closeCart()" class="text-white hover:text-gray-300">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Cart Items -->
+                <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+                    <!-- Items will be injected by JS -->
+                </div>
+
+                <!-- Footer with Total and Actions -->
+                <div class="border-t border-gray-200 bg-gray-50 p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-lg font-bold text-gray-900">Итого:</span>
+                        <span id="cart-total" class="text-2xl font-bold text-[#002855]">0 сом</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="clearCart()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded transition">
+                            Очистить корзину
+                        </button>
+                        <button onclick="checkoutCart()" class="flex-1 bg-[#66CC33] hover:bg-[#57b32c] text-white font-bold py-3 px-6 rounded transition uppercase">
+                            Оформить заказ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/products.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
