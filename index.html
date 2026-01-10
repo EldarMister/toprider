@@ -312,6 +312,13 @@
             cursor: pointer;
         }
         
+        /* Скрыть боковую панель на мобильных */
+        @media (max-width: 1023px) {
+            aside {
+                display: none !important;
+            }
+        }
+        
         @media (min-width: 1024px) {
             #mobile-filters-modal {
                 display: none !important;

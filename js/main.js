@@ -700,7 +700,7 @@ function showHome() {
     const categoriesGrid = document.getElementById('categories-grid');
     const productsGrid = document.getElementById('products-grid');
     const breadcrumbs = document.querySelector('.mb-10.text-center');
-    const sidebar = document.querySelector('aside.hidden');
+    const sidebar = document.querySelector('aside');
     
     if (categoriesGrid) categoriesGrid.classList.remove('hidden');
     if (productsGrid) productsGrid.classList.add('hidden');
@@ -723,7 +723,7 @@ function showCatalog() {
     const categoriesGrid = document.getElementById('categories-grid');
     const productsGrid = document.getElementById('products-grid');
     const breadcrumbs = document.querySelector('.mb-10.text-center');
-    const sidebar = document.querySelector('aside.hidden');
+    const sidebar = document.querySelector('aside');
     
     if (categoriesGrid) categoriesGrid.classList.add('hidden');
     if (productsGrid) productsGrid.classList.remove('hidden');
