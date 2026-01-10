@@ -60,6 +60,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Загружаем корзину из localStorage
     loadCart();
     
+    // Проверяем параметр категории из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFromUrl = urlParams.get('category');
+    if (categoryFromUrl) {
+        filterState.category = categoryFromUrl;
+        // Скрываем карточки категорий, когда выбрана конкретная категория
+        const categoriesGrid = document.getElementById('categories-grid');
+        if (categoriesGrid) {
+            categoriesGrid.classList.add('hidden');
+        }
+    } else {
+        // Если категория не указана в URL, показываем карточки категорий и не показываем товары
+        filterState.category = 'all';
+        const categoriesGrid = document.getElementById('categories-grid');
+        if (categoriesGrid) {
+            categoriesGrid.classList.remove('hidden');
+        }
+    }
+    
     // Инициализация UI
     setupHeader();
     updateCartCount();
@@ -69,9 +88,18 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileFilters();
     initializeAllFilters();
     
-    // Рендер начального списка (по умолчанию все или первая категория)
-    // Если нужно показать все сразу:
+    // Рендер начального списка с учетом категории из URL
     applyFilters();
+    
+    // Прокрутка к каталогу товаров при переходе на категорию из URL
+    if (categoryFromUrl) {
+        setTimeout(() => {
+            const grid = document.getElementById('products-grid');
+            if (grid) {
+                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }, 100);
+    }
 });
 
 // Helper: Get Category Name
@@ -509,6 +537,13 @@ window.handleSearch = handleSearch;
 
 // Главная функция применения фильтров
 function applyFilters() {
+    // Если категория не выбрана (all), показываем главную страницу с категориями
+    if (filterState.category === 'all') {
+        showHome();
+        return;
+    }
+    
+    // Иначе показываем каталог товаров
     showCatalog();
 
     let filtered = allProducts.filter(p => {
@@ -631,6 +666,12 @@ function applyFilters() {
     renderProducts(filtered);
     renderPagination(filtered.length);
     
+    // Обновляем заголовок на основе категории
+    const title = document.querySelector('#catalog-page h1.text-4xl');
+    if (title) {
+        title.textContent = filterState.category === 'all' ? 'Каталог товаров' : getCategoryName(filterState.category);
+    }
+    
     // Обновляем текст "Показано X товаров"
     const countEl = document.querySelector('.text-sm.text-gray-400.pl-2');
     if (countEl) {
@@ -640,33 +681,55 @@ function applyFilters() {
     }
 }
 
-// Выбор категории (из меню или грида)
+// Выбор категории (из меню или грида) - переход на новую страницу
 function filterByCategory(category) {
-    filterState.category = category;
-    
-    // Сброс фильтров при смене категории? Обычно нет, но можно.
-    // Оставим фильтры цены и спеков активными, это удобно.
-    
-    applyFilters();
-    
-    // Обновляем заголовок
-    const title = document.querySelector('#catalog-page h1.text-4xl');
-    if (title) {
-        title.textContent = getCategoryName(category) === 'all' ? 'Каталог товаров' : getCategoryName(category);
-    }
-    
-    // Скролл
-    const grid = document.getElementById('products-grid');
-    if (grid) {
-        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Переход на новую страницу с параметром категории в URL
+    const baseUrl = window.location.origin + window.location.pathname;
+    const newUrl = baseUrl + '?category=' + encodeURIComponent(category);
+    window.location.href = newUrl;
 }
 window.filterByCategory = filterByCategory;
 
 // Показать каталог, скрыть товар
+// Показать главную страницу с категориями
+function showHome() {
+    document.getElementById('catalog-page').classList.remove('hidden');
+    document.getElementById('product-page').classList.add('hidden');
+    
+    // Скрыть товары и показать грид категорий
+    const categoriesGrid = document.getElementById('categories-grid');
+    const productsGrid = document.getElementById('products-grid');
+    const breadcrumbs = document.querySelector('.mb-10.text-center');
+    const sidebar = document.querySelector('aside.hidden');
+    
+    if (categoriesGrid) categoriesGrid.classList.remove('hidden');
+    if (productsGrid) productsGrid.classList.add('hidden');
+    if (breadcrumbs) breadcrumbs.classList.add('hidden');
+    if (sidebar) sidebar.classList.add('hidden');
+    
+    // Сбросить фильтр категории
+    filterState.category = 'all';
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.showHome = showHome;
+
+// Показать каталог товаров
 function showCatalog() {
     document.getElementById('catalog-page').classList.remove('hidden');
     document.getElementById('product-page').classList.add('hidden');
+    
+    // Показать товары и скрыть грид категорий
+    const categoriesGrid = document.getElementById('categories-grid');
+    const productsGrid = document.getElementById('products-grid');
+    const breadcrumbs = document.querySelector('.mb-10.text-center');
+    const sidebar = document.querySelector('aside.hidden');
+    
+    if (categoriesGrid) categoriesGrid.classList.add('hidden');
+    if (productsGrid) productsGrid.classList.remove('hidden');
+    if (breadcrumbs) breadcrumbs.classList.remove('hidden');
+    if (sidebar) sidebar.classList.remove('hidden');
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 window.showCatalog = showCatalog;
@@ -1063,7 +1126,7 @@ function renderProducts(productsToRender) {
 
     const bannerHtml = `
         <div class="col-span-full bg-[#FFD700] py-3 px-4 text-center font-black text-black text-xs md:text-base uppercase tracking-tight w-full" style="background: #FFD700;">
-            <span>Забери самокат сейчас и плати всего 299с в день!</span>
+            <span>Забери самокат сейчас и плати всего 299 СОМ в день!</span>
         </div>
     `;
 
@@ -1295,20 +1358,18 @@ function setupSortControls() {
     }
 }
 
-// Обработчик выбора категории из селекта
+// Обработчик выбора категории из селекта - переход на новую страницу
 function handleCategorySelect(category) {
-    if (category === 'all' || category === '') {
-        filterState.category = 'all';
-    } else {
-        filterState.category = category;
-    }
-    applyFilters();
+    const selectedCategory = (category === 'all' || category === '') ? 'all' : category;
     
-    // Обновляем заголовок
-    const title = document.querySelector('#catalog-page h1.text-4xl');
-    if (title) {
-        title.textContent = getCategoryName(filterState.category) === 'all' ? 'Каталог товаров' : getCategoryName(filterState.category);
+    // Переход на новую страницу с параметром категории в URL
+    const url = new URL(window.location.href);
+    if (selectedCategory === 'all') {
+        url.searchParams.delete('category');
+    } else {
+        url.searchParams.set('category', selectedCategory);
     }
+    window.location.href = url.toString();
 }
 window.handleCategorySelect = handleCategorySelect;
 
@@ -1317,6 +1378,10 @@ function setupCategorySelect() {
     const categorySelect = document.querySelector('select[data-category]');
     
     if (categorySelect) {
+        // Получаем текущую категорию из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentCategory = urlParams.get('category') || 'all';
+        
         // Заполняем опции
         const categories = [
             { value: 'all', name: 'Все категории' },
@@ -1328,7 +1393,7 @@ function setupCategorySelect() {
         ];
         
         categorySelect.innerHTML = categories.map(cat => 
-            `<option value="${cat.value}">${cat.name}</option>`
+            `<option value="${cat.value}" ${cat.value === currentCategory ? 'selected' : ''}>${cat.name}</option>`
         ).join('');
         
         categorySelect.addEventListener('change', (e) => {
@@ -1353,6 +1418,10 @@ function setupMobileFilters() {
         // Инициализируем селект категории в модальном окне
         const mobileCategorySelect = mobileFiltersContent.querySelector('select[data-category]');
         if (mobileCategorySelect) {
+            // Получаем текущую категорию из URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const currentCategory = urlParams.get('category') || 'all';
+            
             const categories = [
                 { value: 'all', name: 'Все категории' },
                 { value: 'bicycles', name: 'Электровелосипеды' },
@@ -1363,7 +1432,7 @@ function setupMobileFilters() {
             ];
             
             mobileCategorySelect.innerHTML = categories.map(cat => 
-                `<option value="${cat.value}">${cat.name}</option>`
+                `<option value="${cat.value}" ${cat.value === currentCategory ? 'selected' : ''}>${cat.name}</option>`
             ).join('');
             
             mobileCategorySelect.addEventListener('change', (e) => {
