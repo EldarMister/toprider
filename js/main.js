@@ -1037,6 +1037,32 @@ function nextImage() {
 }
 window.nextImage = nextImage;
 
+// Навигация по изображениям на карточке товара (в каталоге)
+function changeProductImage(productId, direction) {
+    const imageElement = document.getElementById(`product-image-${productId}`);
+    if (!imageElement) return;
+    
+    const images = JSON.parse(imageElement.getAttribute('data-images') || '[]');
+    if (images.length <= 1) return;
+    
+    let currentIndex = parseInt(imageElement.getAttribute('data-current-index') || '0');
+    
+    // Изменяем индекс в зависимости от направления (-1 для влево, 1 для вправо)
+    currentIndex += direction;
+    
+    // Обрабатываем зацикливание
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    } else if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+    
+    // Обновляем изображение и индекс
+    imageElement.src = images[currentIndex];
+    imageElement.setAttribute('data-current-index', currentIndex.toString());
+}
+window.changeProductImage = changeProductImage;
+
 // Обновление главного изображения и миниатюр
 function updateMainImage() {
     const mainImgPage = document.getElementById('main-product-image-page');
@@ -1140,15 +1166,32 @@ function renderProducts(productsToRender) {
             `<svg class="w-3 h-3 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}" ${i < rating ? 'fill="currentColor"' : ''} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`
         ).join('');
 
+        // Получаем массив изображений товара
+        const productImages = product.images && product.images.length > 0 ? product.images : [product.image];
+        const hasMultipleImages = productImages.length > 1;
+        const imageContainerId = `product-image-${product.id}`;
+        
+        // Стрелки навигации (показываем только если больше 1 фото) - скрыты по умолчанию, появляются при hover/touch
+        const arrowsHtml = hasMultipleImages ? `
+            <button onclick="event.stopPropagation(); changeProductImage(${product.id}, -1)" class="product-arrow-left absolute left-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-1.5 shadow-lg transition opacity-0 group-hover:opacity-100 z-20">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <button onclick="event.stopPropagation(); changeProductImage(${product.id}, 1)" class="product-arrow-right absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/90 hover:bg-white text-gray-800 rounded-full p-1.5 shadow-lg transition opacity-0 group-hover:opacity-100 z-20">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+        ` : '';
+        
         const productHtml = `
         <div onclick="showProduct(${product.id})" class="product-card cursor-pointer group bg-white flex flex-col">
             <!-- Image Section -->
-            <div class="relative bg-white overflow-hidden" style="aspect-ratio: 1 / 1;">
-                <img src="${product.image}" alt="${product.title}" class="w-full h-full object-contain object-center">
+            <div class="relative bg-white overflow-hidden product-image-container" style="aspect-ratio: 1 / 1;" ontouchstart="this.classList.add('touching')" ontouchend="setTimeout(() => this.classList.remove('touching'), 300)">
+                ${arrowsHtml}
+                <img id="${imageContainerId}" src="${productImages[0]}" alt="${product.title}" class="w-full h-full object-contain object-center" data-images='${JSON.stringify(productImages)}' data-current-index="0">
                 
                 <!-- Quick View Button -->
-                <button onclick="event.stopPropagation(); openQuickView(${product.id})" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#66CC33] hover:text-white z-10" title="Быстрый просмотр">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                <button onclick="event.stopPropagation(); openQuickView(${product.id})" class="product-quick-view absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-white/95 hover:bg-white text-gray-800 px-2 md:px-3 py-1.5 rounded shadow-lg transition flex items-center gap-1.5 z-10" title="Быстрый просмотр">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    <span class="quick-view-text font-bold uppercase hidden md:inline text-[10px]">БЫСТРЫЙ ПРОСМОТР</span>
                 </button>
             </div>
             

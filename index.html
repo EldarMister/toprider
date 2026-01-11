@@ -145,6 +145,55 @@
             transform: scale(1.25) !important;
         }
         
+        /* Кнопки навигации и быстрого просмотра - скрыты по умолчанию */
+        .product-arrow-left,
+        .product-arrow-right,
+        .product-quick-view {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Показываем кнопки при hover на ПК */
+        .product-card:hover .product-arrow-left,
+        .product-card:hover .product-arrow-right,
+        .product-card:hover .product-quick-view {
+            opacity: 1 !important;
+        }
+        
+        /* Показываем кнопки при touch на мобильных */
+        .product-image-container.touching .product-arrow-left,
+        .product-image-container.touching .product-arrow-right,
+        .product-image-container.touching .product-quick-view {
+            opacity: 1 !important;
+        }
+        
+        /* Для мобильных устройств показываем кнопки при активном состоянии */
+        @media (max-width: 640px) {
+            .product-image-container:active .product-arrow-left,
+            .product-image-container:active .product-arrow-right,
+            .product-image-container:active .product-quick-view {
+                opacity: 1 !important;
+            }
+            
+            /* Скрываем текст "БЫСТРЫЙ ПРОСМОТР" на мобильных - показываем только иконку */
+            .quick-view-text {
+                display: none !important;
+            }
+            
+            /* Делаем кнопку компактнее на мобильных - только иконка */
+            .product-quick-view {
+                padding: 0.5rem !important;
+                min-width: auto !important;
+            }
+        }
+        
+        /* Скрываем текст на планшетах и меньше (до 768px) */
+        @media (max-width: 767px) {
+            .quick-view-text {
+                display: none !important;
+            }
+        }
+        
         /* Улучшение качества всех изображений */
         img {
             image-rendering: -webkit-optimize-contrast;
@@ -995,6 +1044,11 @@
     <!-- ReviewLab Widget -->
     <section class="bg-white py-12">
         <div class="container-custom">
+            <div class="flex items-center justify-center gap-2 md:gap-4 mb-8 px-4 md:px-0">
+                <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
+                <h2 class="text-base md:text-2xl lg:text-3xl font-bold text-[#66CC66] text-center px-2 md:px-0">МЫ ЛУЧШИЕ ПО МНЕНИЮ ПОКУПАТЕЛЕЙ</h2>
+                <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
+            </div>
             <review-lab data-widgetid="696393614994ec93411fd7eb"></review-lab>
         </div>
     </section>
