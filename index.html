@@ -324,6 +324,49 @@
                 display: none !important;
             }
         }
+        
+        /* ReviewLab Widget Mobile Styles */
+        @media (max-width: 640px) {
+            review-lab {
+                display: block !important;
+                width: 100% !important;
+            }
+            
+            /* Принудительно вертикальное расположение всех элементов виджета */
+            review-lab *,
+            review-lab > *,
+            review-lab > div,
+            review-lab > section,
+            review-lab [class*="review"],
+            review-lab [class*="item"],
+            review-lab [class*="card"],
+            review-lab [class*="container"],
+            review-lab [class*="wrapper"] {
+                display: flex !important;
+                flex-direction: column !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            
+            /* Гарантируем вертикальное расположение элементов в сетках и строках */
+            review-lab [class*="grid"],
+            review-lab [class*="row"],
+            review-lab [class*="flex"],
+            review-lab [style*="display: grid"],
+            review-lab [style*="display: flex"] {
+                flex-direction: column !important;
+                display: flex !important;
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Отступы между элементами отзывов */
+            review-lab [class*="review"]:not(:last-child),
+            review-lab [class*="item"]:not(:last-child),
+            review-lab [class*="card"]:not(:last-child) {
+                margin-bottom: 1.5rem !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-white w-full">
