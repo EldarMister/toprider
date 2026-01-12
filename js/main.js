@@ -60,25 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Загружаем корзину из localStorage
     loadCart();
     
-    // Проверяем параметр категории из URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const categoryFromUrl = urlParams.get('category');
-    if (categoryFromUrl) {
-        filterState.category = categoryFromUrl;
-        // Скрываем карточки категорий, когда выбрана конкретная категория
-        const categoriesGrid = document.getElementById('categories-grid');
-        if (categoriesGrid) {
-            categoriesGrid.classList.add('hidden');
-        }
-    } else {
-        // Если категория не указана в URL, показываем карточки категорий и не показываем товары
-        filterState.category = 'all';
-        const categoriesGrid = document.getElementById('categories-grid');
-        if (categoriesGrid) {
-            categoriesGrid.classList.remove('hidden');
-        }
-    }
-    
     // Инициализация UI
     setupHeader();
     updateCartCount();
@@ -88,17 +69,50 @@ document.addEventListener('DOMContentLoaded', () => {
     setupMobileFilters();
     initializeAllFilters();
     
-    // Рендер начального списка с учетом категории из URL
-    applyFilters();
+    // Проверяем параметры из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+    const categoryFromUrl = urlParams.get('category');
     
-    // Прокрутка к каталогу товаров при переходе на категорию из URL
-    if (categoryFromUrl) {
+    // Если есть ID товара в URL, показываем страницу товара
+    if (productId) {
+        const product = allProducts.find(p => p.id === parseInt(productId));
+        if (product) {
+            const catalogPage = document.getElementById('catalog-page');
+            const productPage = document.getElementById('product-page');
+            
+            if (catalogPage) catalogPage.classList.add('hidden');
+            if (productPage) {
+                productPage.classList.remove('hidden');
+                renderProductPage(product, productPage);
+            }
+        }
+    } else if (categoryFromUrl) {
+        // Если есть категория, но нет товара
+        filterState.category = categoryFromUrl;
+        // Скрываем карточки категорий, когда выбрана конкретная категория
+        const categoriesGrid = document.getElementById('categories-grid');
+        if (categoriesGrid) {
+            categoriesGrid.classList.add('hidden');
+        }
+        // Рендер начального списка с учетом категории из URL
+        applyFilters();
+        // Прокрутка к каталогу товаров при переходе на категорию из URL
         setTimeout(() => {
             const grid = document.getElementById('products-grid');
             if (grid) {
                 grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }, 100);
+    } else {
+        // Если категория не указана в URL, показываем карточки категорий и не показываем товары
+        filterState.category = 'all';
+        const categoriesGrid = document.getElementById('categories-grid');
+        if (categoriesGrid) {
+            categoriesGrid.classList.remove('hidden');
+        }
+        // Рендер начального списка
+        applyFilters();
     }
 });
 
@@ -716,6 +730,11 @@ window.showHome = showHome;
 
 // Показать каталог товаров
 function showCatalog() {
+    // Обновляем URL, убирая параметр product
+    const url = new URL(window.location.href);
+    url.searchParams.delete('product');
+    window.history.pushState({}, '', url.toString());
+    
     document.getElementById('catalog-page').classList.remove('hidden');
     document.getElementById('product-page').classList.add('hidden');
     
@@ -739,6 +758,11 @@ function showProduct(id) {
     const product = allProducts.find(p => p.id === id);
     if (!product) return;
 
+    // Обновляем URL без перезагрузки страницы
+    const url = new URL(window.location.href);
+    url.searchParams.set('product', id);
+    window.history.pushState({ productId: id }, '', url.toString());
+
     const catalogPage = document.getElementById('catalog-page');
     const productPage = document.getElementById('product-page');
 
@@ -750,6 +774,46 @@ function showProduct(id) {
     window.scrollTo({ top: 0, behavior: 'instant' });
 }
 window.showProduct = showProduct;
+
+// Вернуться назад
+function goBack() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete('product');
+    window.history.pushState({}, '', url.toString());
+    
+    const catalogPage = document.getElementById('catalog-page');
+    const productPage = document.getElementById('product-page');
+
+    productPage.classList.add('hidden');
+    catalogPage.classList.remove('hidden');
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+window.goBack = goBack;
+
+// Обработчик кнопки "Назад" в браузере
+window.addEventListener('popstate', function(event) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = urlParams.get('product');
+    
+    if (productId) {
+        const product = allProducts.find(p => p.id === parseInt(productId));
+        if (product) {
+            const catalogPage = document.getElementById('catalog-page');
+            const productPage = document.getElementById('product-page');
+            
+            catalogPage.classList.add('hidden');
+            productPage.classList.remove('hidden');
+            renderProductPage(product, productPage);
+        }
+    } else {
+        const catalogPage = document.getElementById('catalog-page');
+        const productPage = document.getElementById('product-page');
+        
+        productPage.classList.add('hidden');
+        catalogPage.classList.remove('hidden');
+    }
+});
 
 // Быстрый просмотр
 function openQuickView(id) {
@@ -915,11 +979,16 @@ function renderProductPage(product, container, isModal = false) {
     // Хлебные крошки
     const breadcrumbs = isModal ? '' : `
         <div class="text-sm text-gray-500 mb-6 flex items-center gap-2">
-            <a href="#" onclick="showCatalog()" class="hover:text-blue-600">Главная</a>
+            <button onclick="goBack()" class="hover:text-blue-600 flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Назад
+            </button>
             <span>/</span>
-            <a href="#" onclick="showCatalog()" class="hover:text-blue-600">Каталог</a>
+            <a href="#" onclick="goBack(); return false;" class="hover:text-blue-600">Каталог</a>
             <span>/</span>
-            <a href="#" onclick="filterByCategory('${product.category}')" class="hover:text-blue-600">${getCategoryName(product.category)}</a>
+            <a href="#" onclick="goBack(); filterByCategory('${product.category}'); return false;" class="hover:text-blue-600">${getCategoryName(product.category)}</a>
             <span>/</span>
             <span class="text-gray-900 truncate max-w-[200px]">${product.title}</span>
         </div>
