@@ -1,38 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topriding.kg — Электровелосипеды, Электробайки, Электросамокаты в Бишкеке</title>
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Интернет-магазин Topriding.kg — электровелосипеды, электробайки, электросамокаты и аксессуары в Бишкеке. Доставка по городу, рассрочка. Тел: 0508 708 408">
-    <meta name="keywords" content="электровелосипеды Бишкек, электробайки Кыргызстан, электросамокаты, электротранспорт, велосипеды с мотором, электрические велосипеды">
+    <meta name="description"
+        content="Интернет-магазин Topriding.kg — электровелосипеды, электробайки, электросамокаты и аксессуары в Бишкеке. Доставка по городу, рассрочка. Тел: 0508 708 408">
+    <meta name="keywords"
+        content="электровелосипеды Бишкек, электробайки Кыргызстан, электросамокаты, электротранспорт, велосипеды с мотором, электрические велосипеды">
     <meta name="author" content="Topriding.kg">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://topriding.kg/">
     <meta property="og:title" content="Topriding.kg — Электровелосипеды, Электробайки, Электросамокаты в Бишкеке">
-    <meta property="og:description" content="Интернет-магазин электротранспорта в Бишкеке. Электровелосипеды, электробайки, электросамокаты и аксессуары. Доставка, рассрочка.">
+    <meta property="og:description"
+        content="Интернет-магазин электротранспорта в Бишкеке. Электровелосипеды, электробайки, электросамокаты и аксессуары. Доставка, рассрочка.">
     <meta property="og:image" content="https://topriding.kg/assets/images/logo.png">
     <meta property="og:site_name" content="Topriding.kg">
     <meta property="og:locale" content="ru_KG">
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://topriding.kg/">
     <meta property="twitter:title" content="Topriding.kg — Электровелосипеды, Электробайки, Электросамокаты">
     <meta property="twitter:description" content="Интернет-магазин электротранспорта в Бишкеке. Доставка, рассрочка.">
     <meta property="twitter:image" content="https://topriding.kg/assets/images/logo.png">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    
+
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -72,26 +76,35 @@
     }
     </script>
     <style>
-        * { box-sizing: border-box; }
-        html, body { 
-            font-family: 'Roboto', sans-serif; 
-            color: #333; 
-            overflow-x: hidden; 
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            overflow-x: hidden;
             width: 100%;
             max-width: 100vw;
             margin: 0;
             padding: 0;
         }
-        .container-custom { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 15px; 
-            width: 100%; 
+
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
             box-sizing: border-box;
         }
+
         /* Mobile fixes */
-        img { max-width: 100%; height: auto; }
-        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
         /* Grid for products - MAIN GRID CONTAINER */
         #products-grid {
             display: grid !important;
@@ -103,7 +116,7 @@
             padding: 0 !important;
             margin: 0 !important;
         }
-        
+
         /* Product card is a direct child of grid */
         #products-grid .product-card {
             display: flex !important;
@@ -121,18 +134,18 @@
             margin: 0 !important;
             box-sizing: border-box !important;
         }
-        
+
         /* Уменьшаем отступы в карточках */
-        #products-grid .product-card > div:last-child {
+        #products-grid .product-card>div:last-child {
             padding: 0.5rem !important;
         }
-        
+
         /* Увеличиваем изображение в карточках, уменьшаем белое пространство */
-        #products-grid .product-card > div:first-child {
+        #products-grid .product-card>div:first-child {
             padding: 0.25rem !important;
         }
-        
-        #products-grid .product-card > div:first-child img {
+
+        #products-grid .product-card>div:first-child img {
             transform: scale(1.2) !important;
             transition: transform 0.3s ease !important;
             image-rendering: -webkit-optimize-contrast;
@@ -140,11 +153,11 @@
             image-rendering: high-quality;
             -ms-interpolation-mode: nearest-neighbor;
         }
-        
-        #products-grid .product-card:hover > div:first-child img {
+
+        #products-grid .product-card:hover>div:first-child img {
             transform: scale(1.25) !important;
         }
-        
+
         /* Кнопки навигации и быстрого просмотра - скрыты по умолчанию */
         .product-arrow-left,
         .product-arrow-right,
@@ -152,48 +165,49 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         /* Показываем кнопки при hover на ПК */
         .product-card:hover .product-arrow-left,
         .product-card:hover .product-arrow-right,
         .product-card:hover .product-quick-view {
             opacity: 1 !important;
         }
-        
+
         /* Показываем кнопки при touch на мобильных */
         .product-image-container.touching .product-arrow-left,
         .product-image-container.touching .product-arrow-right,
         .product-image-container.touching .product-quick-view {
             opacity: 1 !important;
         }
-        
+
         /* Для мобильных устройств показываем кнопки при активном состоянии */
         @media (max-width: 640px) {
+
             .product-image-container:active .product-arrow-left,
             .product-image-container:active .product-arrow-right,
             .product-image-container:active .product-quick-view {
                 opacity: 1 !important;
             }
-            
+
             /* Скрываем текст "БЫСТРЫЙ ПРОСМОТР" на мобильных - показываем только иконку */
             .quick-view-text {
                 display: none !important;
             }
-            
+
             /* Делаем кнопку компактнее на мобильных - только иконка */
             .product-quick-view {
                 padding: 0.5rem !important;
                 min-width: auto !important;
             }
         }
-        
+
         /* Скрываем текст на планшетах и меньше (до 768px) */
         @media (max-width: 767px) {
             .quick-view-text {
                 display: none !important;
             }
         }
-        
+
         /* Улучшение качества всех изображений */
         img {
             image-rendering: -webkit-optimize-contrast;
@@ -201,13 +215,13 @@
             image-rendering: high-quality;
             -ms-interpolation-mode: bicubic;
         }
-        
+
         /* Reset width for inner content */
-        #products-grid .product-card > * {
+        #products-grid .product-card>* {
             width: auto;
             max-width: 100%;
         }
-        
+
         /* Banner spans full width of grid */
         #products-grid .col-span-full {
             grid-column: 1 / -1 !important;
@@ -215,26 +229,29 @@
             margin: 0 !important;
             display: block !important;
         }
-        
+
         @media (max-width: 640px) {
-            .container-custom { 
-                padding: 0 10px !important; 
+            .container-custom {
+                padding: 0 10px !important;
                 width: 100% !important;
                 max-width: 100% !important;
                 box-sizing: border-box !important;
             }
+
             /* Убеждаемся, что родительский контейнер не ограничивает ширину */
             .lg\:grid {
                 display: block !important;
                 width: 100% !important;
                 max-width: 100% !important;
             }
-            .lg\:grid > .flex-1 {
+
+            .lg\:grid>.flex-1 {
                 width: 100% !important;
                 max-width: 100% !important;
                 display: block !important;
                 box-sizing: border-box !important;
             }
+
             /* Принудительно применяем grid на мобильных - 2 колонки */
             #products-grid {
                 gap: 0.5rem !important;
@@ -246,6 +263,7 @@
                 margin: 0 !important;
                 box-sizing: border-box !important;
             }
+
             #products-grid .product-card {
                 border: 1px solid #e5e7eb !important;
                 box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
@@ -254,6 +272,7 @@
                 max-width: 100% !important;
                 box-sizing: border-box !important;
             }
+
             #products-grid .col-span-full {
                 grid-column: 1 / -1 !important;
                 width: 100% !important;
@@ -262,32 +281,34 @@
                 box-sizing: border-box !important;
             }
         }
-        
+
         @media (min-width: 641px) and (max-width: 1023px) {
             #products-grid {
                 grid-template-columns: repeat(3, 1fr) !important;
                 gap: 1rem !important;
             }
         }
-        
+
         @media (min-width: 1024px) {
             #products-grid {
                 grid-template-columns: repeat(4, 1fr) !important;
                 gap: 1.5rem !important;
             }
         }
-        
+
         /* Стили для таблицы технических характеристик */
         .specs-table-content table {
             border-collapse: collapse;
         }
+
         .specs-table-content td {
             border-bottom: 1px solid #e5e7eb;
         }
+
         .specs-table-content tr:last-child td {
             border-bottom: none;
         }
-        
+
         /* List View Styles */
         #products-grid.list-view {
             grid-template-columns: 1fr !important;
@@ -295,7 +316,7 @@
             width: 100% !important;
             max-width: 100% !important;
         }
-        
+
         #products-grid.list-view .product-card {
             flex-direction: row !important;
             max-width: 100% !important;
@@ -303,15 +324,15 @@
             height: auto !important;
             box-sizing: border-box !important;
         }
-        
-        #products-grid.list-view .product-card > div:first-child {
+
+        #products-grid.list-view .product-card>div:first-child {
             flex-shrink: 0;
             width: 200px !important;
             min-width: 200px !important;
             max-width: 200px !important;
         }
-        
-        #products-grid.list-view .product-card > div:last-child {
+
+        #products-grid.list-view .product-card>div:last-child {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -319,73 +340,75 @@
             padding: 1.5rem !important;
             min-width: 0 !important;
         }
-        
+
         @media (max-width: 640px) {
             #products-grid.list-view {
                 width: 100% !important;
                 max-width: 100% !important;
             }
+
             #products-grid.list-view .product-card {
                 flex-direction: column !important;
                 width: 100% !important;
                 max-width: 100% !important;
             }
-            #products-grid.list-view .product-card > div:first-child {
+
+            #products-grid.list-view .product-card>div:first-child {
                 width: 100% !important;
                 min-width: 100% !important;
                 max-width: 100% !important;
             }
         }
-        
+
         /* Mobile Filters Modal Styles */
         #mobile-filters-modal {
             z-index: 50;
         }
-        
+
         #mobile-filters-modal .fixed.right-0 {
             transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
         }
-        
+
         #mobile-filters-modal:not(.hidden) .fixed.right-0 {
             transform: translateX(0) !important;
         }
-        
+
         #mobile-filters-content {
             max-height: calc(100vh - 80px);
             overflow-y: auto;
         }
-        
+
         #mobile-filters-content select,
         #mobile-filters-content label {
             cursor: pointer;
         }
-        
+
         /* Скрыть боковую панель на мобильных */
         @media (max-width: 1023px) {
             aside {
                 display: none !important;
             }
         }
-        
+
         @media (min-width: 1024px) {
             #mobile-filters-modal {
                 display: none !important;
             }
         }
-        
+
         /* ReviewLab Widget Mobile Styles */
         @media (max-width: 640px) {
             review-lab {
                 display: block !important;
                 width: 100% !important;
             }
-            
+
             /* Принудительно вертикальное расположение всех элементов виджета */
             review-lab *,
-            review-lab > *,
-            review-lab > div,
-            review-lab > section,
+            review-lab>*,
+            review-lab>div,
+            review-lab>section,
             review-lab [class*="review"],
             review-lab [class*="item"],
             review-lab [class*="card"],
@@ -397,7 +420,7 @@
                 max-width: 100% !important;
                 box-sizing: border-box !important;
             }
-            
+
             /* Гарантируем вертикальное расположение элементов в сетках и строках */
             review-lab [class*="grid"],
             review-lab [class*="row"],
@@ -408,7 +431,7 @@
                 display: flex !important;
                 grid-template-columns: 1fr !important;
             }
-            
+
             /* Отступы между элементами отзывов */
             review-lab [class*="review"]:not(:last-child),
             review-lab [class*="item"]:not(:last-child),
@@ -418,17 +441,21 @@
         }
     </style>
 </head>
+
 <body class="bg-white w-full">
 
     <header class="py-4 border-b border-gray-100">
         <div class="container-custom flex flex-col lg:flex-row justify-between items-center gap-4">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div onclick="showHome()" class="text-3xl font-black text-[#002855] tracking-tighter italic cursor-pointer hover:opacity-80 transition">Topriding<span class="text-red-600">.kg</span></div>
+                <div onclick="showHome()"
+                    class="text-3xl font-black text-[#002855] tracking-tighter italic cursor-pointer hover:opacity-80 transition">
+                    Topriding<span class="text-red-600">.kg</span></div>
             </div>
-            
+
             <!-- Contacts (Visible on mobile now) -->
-            <div class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
+            <div
+                class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
                 <div class="text-center">
                     <div class="text-red-500 text-xl mb-1">📍</div>
                     <p>Бишкек,<br>Каралаева 40/4</p>
@@ -447,8 +474,11 @@
     </header>
 
     <!-- Promo Banner -->
-    <div class="bg-[#FFD700] pt-2 pb-1 px-4 text-center w-full flex items-center justify-center" style="border: none; border-bottom: none;">
-        <p class="text-black font-extrabold text-xs md:text-base uppercase tracking-tight m-0" style="text-decoration: none; border: none; border-bottom: none;">ЗАБЕРИ САМОКАТ СЕЙЧАС И ПЛАТИ ВСЕГО 299 СОМ В ДЕНЬ!</p>
+    <div class="bg-[#FFD700] pt-2 pb-1 px-4 text-center w-full flex items-center justify-center"
+        style="border: none; border-bottom: none;">
+        <p class="text-black font-extrabold text-xs md:text-base uppercase tracking-tight m-0"
+            style="text-decoration: none; border: none; border-bottom: none;">ЗАБЕРИ САМОКАТ СЕЙЧАС И ПЛАТИ ВСЕГО 299
+            СОМ В ДЕНЬ!</p>
     </div>
 
     <nav class="bg-[#002855] border-t-4 border-[#FFD700] sticky top-0 z-40 shadow-md">
@@ -456,44 +486,71 @@
             <!-- Desktop Nav -->
             <div class="hidden lg:flex justify-between items-center">
                 <ul class="flex flex-wrap text-white text-[12px] font-bold uppercase">
-                    <li onclick="filterByCategory('electro_scooters')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
-                    <li onclick="filterByCategory('electro_bikes')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электробайки</li>
-                    <li onclick="filterByCategory('bicycles')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электровелосипеды</li>
-                    <li onclick="filterByCategory('accessories')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Аксессуары</li>
-                    <li onclick="showCatalog()" class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
-                    <li onclick="openCart()" class="px-5 py-4 flex items-center gap-2 bg-[#001a38] cursor-pointer hover:bg-[#001529] transition">🛒 <span id="cart-count">0</span> ТОВАРОВ</li>
+                    <li onclick="filterByCategory('electro_scooters')"
+                        class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
+                    <li onclick="filterByCategory('electro_bikes')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">
+                        Электробайки</li>
+                    <li onclick="filterByCategory('bicycles')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">
+                        Электровелосипеды</li>
+                    <li onclick="filterByCategory('accessories')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">
+                        Аксессуары</li>
+                    <li onclick="showCatalog()" class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">
+                        Рассрочка</li>
+                    <li onclick="openCart()"
+                        class="px-5 py-4 flex items-center gap-2 bg-[#001a38] cursor-pointer hover:bg-[#001529] transition">
+                        🛒 <span id="cart-count">0</span> ТОВАРОВ</li>
                 </ul>
                 <div class="flex h-10 my-2">
-                    <input type="text" id="search-input-desktop" placeholder="Поиск..." class="px-4 py-1 text-sm outline-none w-64 italic text-black">
-                    <button onclick="handleSearch()" class="bg-[#4d4d4d] px-4 text-white hover:bg-black transition">🔍</button>
+                    <input type="text" id="search-input-desktop" placeholder="Поиск..."
+                        class="px-4 py-1 text-sm outline-none w-64 italic text-black">
+                    <button onclick="handleSearch()"
+                        class="bg-[#4d4d4d] px-4 text-white hover:bg-black transition">🔍</button>
                 </div>
             </div>
 
             <!-- Mobile Nav Bar -->
             <div class="flex lg:hidden justify-between items-center py-2">
                 <button id="mobileMenuBtn" class="text-white p-2 focus:outline-none">
-                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
-                
+
                 <div class="flex flex-1 mx-4">
-                    <input type="text" id="search-input-mobile" placeholder="Поиск..." class="w-full px-3 py-2 text-sm outline-none rounded-l-sm italic text-black" onkeypress="if(event.key === 'Enter') handleSearch()">
+                    <input type="text" id="search-input-mobile" placeholder="Поиск..."
+                        class="w-full px-3 py-2 text-sm outline-none rounded-l-sm italic text-black"
+                        onkeypress="if(event.key === 'Enter') handleSearch()">
                     <button onclick="handleSearch()" class="bg-[#4d4d4d] px-3 text-white rounded-r-sm">🔍</button>
                 </div>
 
                 <a href="#" onclick="event.preventDefault(); openCart();" class="text-white p-2 relative">
-                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                    <span id="cart-count-mobile" class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                    <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+                        </path>
+                    </svg>
+                    <span id="cart-count-mobile"
+                        class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
                 </a>
             </div>
 
             <!-- Mobile Menu Dropdown -->
             <div id="mobileMenu" class="hidden lg:hidden border-t border-[#ffffff20] pb-4">
                 <ul class="flex flex-col text-white text-[14px] font-bold uppercase">
-                    <li onclick="filterByCategory('electro_scooters'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электросамокаты</li>
-                    <li onclick="filterByCategory('electro_bikes'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электробайки</li>
-                    <li onclick="filterByCategory('bicycles'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электровелосипеды</li>
-                    <li onclick="filterByCategory('accessories'); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Аксессуары</li>
-                    <li onclick="showCatalog(); document.getElementById('mobileMenu').classList.add('hidden');" class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
+                    <li onclick="filterByCategory('electro_scooters'); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электросамокаты
+                    </li>
+                    <li onclick="filterByCategory('electro_bikes'); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Электробайки
+                    </li>
+                    <li onclick="filterByCategory('bicycles'); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">
+                        Электровелосипеды</li>
+                    <li onclick="filterByCategory('accessories'); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Аксессуары</li>
+                    <li onclick="showCatalog(); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
                 </ul>
             </div>
         </div>
@@ -509,7 +566,8 @@
                 <div class="mt-3 flex justify-center gap-2 text-sm text-gray-500">
                     <a href="#" onclick="showHome(); event.preventDefault();" class="hover:text-gray-900">Главная</a>
                     <span>/</span>
-                    <a href="#" onclick="showCatalog(); event.preventDefault();" class="hover:text-gray-900">Каталог товаров</a>
+                    <a href="#" onclick="openCatalogView(); event.preventDefault();" class="hover:text-gray-900">Каталог
+                        товаров</a>
                     <span>/</span>
                     <span class="text-gray-900">Электровелосипеды</span>
                 </div>
@@ -522,11 +580,16 @@
                     <div>
                         <h3 class="mb-4 text-base font-bold text-gray-900">Тип</h3>
                         <div class="relative">
-                            <select data-category class="w-full appearance-none rounded border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-500 focus:border-blue-500 focus:outline-none">
+                            <select data-category
+                                class="w-full appearance-none rounded border border-gray-200 bg-white px-4 py-2.5 text-sm text-gray-500 focus:border-blue-500 focus:outline-none">
                                 <option value="all">Все категории</option>
                             </select>
-                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
-                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg>
                             </div>
                         </div>
                     </div>
@@ -535,45 +598,66 @@
                     <div id="filter-price">
                         <h3 class="mb-4 text-base font-bold text-gray-900">Цена</h3>
                         <div class="space-y-3">
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 0, 1000000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 0, 1000000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">Все цены</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 1000, 5000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 1000, 5000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">1000 сом - 5000 сом</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 5000, 10000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 5000, 10000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">5000 сом - 10000 сом</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 10000, 20000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 10000, 20000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">10000 сом - 20000 сом</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 20000, 40000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 20000, 40000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">20000 сом - 40000 сом</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 40000, 80000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 40000, 80000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">40000 сом - 80000 сом</span>
                             </label>
-                            <label class="flex items-center gap-3 cursor-pointer group" onclick="setPriceFilter(this, 80000, 1000000)">
-                                <span class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
-                                    <span class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
+                            <label class="flex items-center gap-3 cursor-pointer group"
+                                onclick="setPriceFilter(this, 80000, 1000000)">
+                                <span
+                                    class="flex h-5 w-5 items-center justify-center rounded-full border border-gray-300 bg-white group-hover:border-blue-500">
+                                    <span
+                                        class="h-2.5 w-2.5 rounded-full bg-blue-600 opacity-0 transition-opacity"></span>
                                 </span>
                                 <span class="text-sm text-gray-600">80000 сом +</span>
                             </label>
@@ -584,7 +668,8 @@
                     <div id="filter-frame">
                         <h3 class="mb-4 text-base font-bold text-gray-900">Размер рамы:</h3>
                         <div class="space-y-3 max-h-64 overflow-y-auto">
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '12\"')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '12\"')">
                                 <div class="flex items-center gap-3">
                                     <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
@@ -593,16 +678,24 @@
                                 </div>
                                 <span class="text-xs text-gray-400">1</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '13\"')">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, '
+                                frameSize', '13\"' )">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">13"</span>
                                 </div>
                                 <span class="text-xs text-gray-400">2</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '14\"')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '14\"')">
                                 <div class="flex items-center gap-3">
                                     <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
@@ -611,16 +704,24 @@
                                 </div>
                                 <span class="text-xs text-gray-400">1</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '16\"')">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, '
+                                frameSize', '16\"' )">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">16"</span>
                                 </div>
                                 <span class="text-xs text-gray-400">3</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '17\"')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '17\"')">
                                 <div class="flex items-center gap-3">
                                     <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
@@ -629,16 +730,24 @@
                                 </div>
                                 <span class="text-xs text-gray-400">76</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '19\"')">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, '
+                                frameSize', '19\"' )">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">19"</span>
                                 </div>
                                 <span class="text-xs text-gray-400">19</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '20.5\"')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '20.5\"')">
                                 <div class="flex items-center gap-3">
                                     <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
@@ -647,37 +756,65 @@
                                 </div>
                                 <span class="text-xs text-gray-400">2</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '21\"')">
+                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, '
+                                frameSize', '21\"' )">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">21"</span>
                                 </div>
                                 <span class="text-xs text-gray-400">9</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '52 см')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '52 см')">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">52 см</span>
                                 </div>
                                 <span class="text-xs text-gray-400">1</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', '55 см')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', '55 см')">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">55 см</span>
                                 </div>
                                 <span class="text-xs text-gray-400">1</span>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'frameSize', 'S')">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'frameSize', 'S')">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">S</span>
                                 </div>
@@ -690,34 +827,62 @@
                     <div id="filter-speed">
                         <h3 class="mb-4 text-base font-bold text-gray-900">Макс. скорость(км/час)</h3>
                         <div class="space-y-3">
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 25)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'speed', 25)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">25 км/ч</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 35)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'speed', 35)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">35 км/ч</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 45)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'speed', 45)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">45 км/ч</span>
                                 </div>
                             </label>
-                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'speed', 55)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'speed', 55)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">55 км/ч</span>
                                 </div>
@@ -729,66 +894,122 @@
                     <div id="filter-motor">
                         <h3 class="mb-4 text-base font-bold text-gray-900">Мощность мотора(ватт)</h3>
                         <div class="space-y-3">
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 250)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 250)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">250W</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 350)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 350)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">350W</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 500)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 500)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">500W</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 750)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 750)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">750W</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 1000)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 1000)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">1000W</span>
                                 </div>
                             </label>
-                            <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 1500)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 1500)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">1500W</span>
                                 </div>
                             </label>
-                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 2000)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 2000)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">2000W</span>
                                 </div>
                             </label>
-                             <label class="flex items-center justify-between cursor-pointer group" onclick="toggleSpecFilter(this, 'motor', 3000)">
+                            <label class="flex items-center justify-between cursor-pointer group"
+                                onclick="toggleSpecFilter(this, 'motor', 3000)">
                                 <div class="flex items-center gap-3">
-                                    <div class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
-                                         <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                                    <div
+                                        class="h-5 w-5 border border-gray-300 bg-white rounded-sm group-hover:border-blue-500 flex items-center justify-center">
+                                        <svg class="w-3 h-3 text-blue-600 hidden" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
                                     </div>
                                     <span class="text-sm text-gray-600">3000W</span>
                                 </div>
@@ -882,34 +1103,53 @@
 
                     <!-- Description -->
                     <p class="mb-8 text-sm leading-relaxed text-gray-500">
-                        Мы предлагаем велосипеды в Бишкеке от проверенных брендов, таких как Trinx, Galaxy, Gestalt, Forever, Phoneix, SameBike, Phillips и многие другие. В нашем ассортименте также имеются запчасти и разнообразные аксессуары для вашего велосипеда.
+                        Мы предлагаем велосипеды в Бишкеке от проверенных брендов, таких как Trinx, Galaxy, Gestalt,
+                        Forever, Phoneix, SameBike, Phillips и многие другие. В нашем ассортименте также имеются
+                        запчасти и разнообразные аксессуары для вашего велосипеда.
                     </p>
 
                     <!-- Toolbar -->
                     <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
                         <div class="flex items-center gap-2">
                             <!-- Mobile Filter Button -->
-                            <button onclick="openMobileFilters()" class="lg:hidden bg-white border border-gray-300 rounded p-2 hover:bg-gray-50 transition">
-                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                            <button onclick="openMobileFilters()"
+                                class="lg:hidden bg-white border border-gray-300 rounded p-2 hover:bg-gray-50 transition">
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z">
+                                    </path>
                                 </svg>
                             </button>
                             <span class="font-bold text-gray-900">Электровелосипеды</span>
-                            <span class="text-sm text-gray-400 pl-2 border-l border-gray-300 ml-2 hidden sm:inline">Showing 1–12 Products of 159 Products</span>
+                            <span
+                                class="text-sm text-gray-400 pl-2 border-l border-gray-300 ml-2 hidden sm:inline">Showing
+                                1–12 Products of 159 Products</span>
                         </div>
                         <div class="flex items-center gap-6">
                             <div class="flex gap-2">
-                                <button class="view-grid-btn text-[#00c2c2] hover:text-[#00a0a0]" onclick="setViewMode('grid')">
-                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                <button class="view-grid-btn text-[#00c2c2] hover:text-[#00a0a0]"
+                                    onclick="setViewMode('grid')">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z">
+                                        </path>
+                                    </svg>
                                 </button>
-                                <button class="view-list-btn text-gray-400 hover:text-gray-600" onclick="setViewMode('list')">
-                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                                <button class="view-list-btn text-gray-400 hover:text-gray-600"
+                                    onclick="setViewMode('list')">
+                                    <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
                                 </button>
                             </div>
                             <div class="flex items-center gap-4">
                                 <div class="flex items-center gap-2">
                                     <span class="text-sm font-bold text-gray-900">Показывать:</span>
-                                    <select data-items-per-page class="rounded border border-gray-200 bg-white py-1 pl-2 pr-6 text-sm text-gray-600 focus:outline-none">
+                                    <select data-items-per-page
+                                        class="rounded border border-gray-200 bg-white py-1 pl-2 pr-6 text-sm text-gray-600 focus:outline-none">
                                         <option value="12">12</option>
                                         <option value="24">24</option>
                                         <option value="36">36</option>
@@ -917,7 +1157,8 @@
                                     </select>
                                 </div>
                                 <div class="flex items-center gap-2">
-                                    <select data-sort class="rounded border border-gray-200 bg-white py-1 pl-2 pr-8 text-sm text-gray-600 focus:outline-none">
+                                    <select data-sort
+                                        class="rounded border border-gray-200 bg-white py-1 pl-2 pr-8 text-sm text-gray-600 focus:outline-none">
                                         <option value="newest">По новизне</option>
                                         <option value="price-asc">Цена: по возрастанию</option>
                                         <option value="price-desc">Цена: по убыванию</option>
@@ -929,36 +1170,55 @@
                     </div>
 
                     <!-- Categories Navigation Grid -->
-                    <div id="categories-grid" class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-8 w-full">
+                    <div id="categories-grid"
+                        class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-8 w-full">
                         <!-- Электросамокаты -->
-                        <div onclick="filterByCategory('electro_scooters')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGT55pkYMjzqshVFvtMw7cgQPTPcpVm6lOAQ&s');"></div>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электросамокаты</h3>
+                        <div onclick="filterByCategory('electro_scooters')"
+                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
+                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGT55pkYMjzqshVFvtMw7cgQPTPcpVm6lOAQ&s');">
+                            </div>
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">
+                                    Электросамокаты</h3>
                             </div>
                         </div>
 
                         <!-- Электробайки -->
-                        <div onclick="filterByCategory('electro_bikes')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('https://formand.ru/image/cache/data/electric-scooters/caigiees-harley-max/elektrobayk-caigiees-harley-max-foto-01-1000x750.jpg');"></div>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электробайки</h3>
+                        <div onclick="filterByCategory('electro_bikes')"
+                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
+                                style="background-image: url('https://formand.ru/image/cache/data/electric-scooters/caigiees-harley-max/elektrobayk-caigiees-harley-max-foto-01-1000x750.jpg');">
+                            </div>
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электробайки
+                                </h3>
                             </div>
                         </div>
 
                         <!-- Электровелосипеды -->
-                        <div onclick="filterByCategory('bicycles')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('assets/images/электровелосипед.jpg');"></div>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электровелосипеды</h3>
+                        <div onclick="filterByCategory('bicycles')"
+                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
+                                style="background-image: url('assets/images/электровелосипед.jpg');"></div>
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">
+                                    Электровелосипеды</h3>
                             </div>
                         </div>
 
                         <!-- Аксессуары -->
-                        <div onclick="filterByCategory('accessories')" class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500" style="background-image: url('assets/images/акксесуары.jpg');"></div>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Аксессуары</h3>
+                        <div onclick="filterByCategory('accessories')"
+                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
+                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
+                                style="background-image: url('assets/images/акксесуары.jpg');"></div>
+                            <div
+                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
+                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Аксессуары
+                                </h3>
                             </div>
                         </div>
                     </div>
@@ -970,69 +1230,87 @@
 
                     <!-- Pagination -->
                     <div class="mt-12 flex items-center justify-center gap-2">
-                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full bg-[#00a0a0] text-sm font-bold text-white">1</a>
-                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">2</a>
-                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">3</a>
+                        <a href="#"
+                            class="flex h-10 w-10 items-center justify-center rounded-full bg-[#00a0a0] text-sm font-bold text-white">1</a>
+                        <a href="#"
+                            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">2</a>
+                        <a href="#"
+                            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">3</a>
                         <span class="flex h-10 w-10 items-center justify-center text-sm text-gray-400">...</span>
-                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">13</a>
-                        <a href="#" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">14</a>
-                        <a href="#" class="ml-4 text-sm font-bold text-[#00a0a0] hover:text-[#008080] uppercase">СЛЕДУЮЩИЙ</a>
+                        <a href="#"
+                            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">13</a>
+                        <a href="#"
+                            class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">14</a>
+                        <a href="#"
+                            class="ml-4 text-sm font-bold text-[#00a0a0] hover:text-[#008080] uppercase">СЛЕДУЮЩИЙ</a>
                     </div>
 
                     <!-- Why Topriding.kg Section -->
                     <div class="mt-16 border-t border-gray-100 pt-12 pb-4">
                         <h2 class="mb-12 text-center text-3xl font-bold text-[#5bc0de]">Почему Topriding.kg?</h2>
-                        
+
                         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
-                                <!-- Item 1 -->
-                                <div class="flex flex-col items-center">
-                                    <div class="mb-4 text-[#ff4d4d]">
-                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.42 0 01-1.043 3.296 3.745 3.42 0 01-3.296 1.043A3.745 3.42 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.42 0 01-3.296-1.043 3.745 3.42 0 01-1.043-3.296A3.745 3.42 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.42 0 011.043-3.296 3.746 3.42 0 013.296-1.043A3.746 3.42 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.42 0 013.296 1.043 3.746 3.42 0 011.043 3.296A3.745 3.42 0 0121 12z" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Полная гарантия</h3>
-                                    <p class="text-sm text-gray-500 max-w-[200px]">На проверку 2 недели и официальная гарантия от 3 до 12 месяцев.</p>
+                            <!-- Item 1 -->
+                            <div class="flex flex-col items-center">
+                                <div class="mb-4 text-[#ff4d4d]">
+                                    <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.42 0 01-1.043 3.296 3.745 3.42 0 01-3.296 1.043A3.745 3.42 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.42 0 01-3.296-1.043 3.745 3.42 0 01-1.043-3.296A3.745 3.42 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.42 0 011.043-3.296 3.746 3.42 0 013.296-1.043A3.746 3.42 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.42 0 013.296 1.043 3.746 3.42 0 011.043 3.296A3.745 3.42 0 0121 12z" />
+                                    </svg>
                                 </div>
+                                <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Полная гарантия</h3>
+                                <p class="text-sm text-gray-500 max-w-[200px]">На проверку 2 недели и официальная
+                                    гарантия от 3 до 12 месяцев.</p>
+                            </div>
 
-                                <!-- Item 2 -->
-                                <div class="flex flex-col items-center">
-                                    <div class="mb-4 text-[#ff4d4d]">
-                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.75" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Бесплатная доставка</h3>
-                                    <p class="text-sm text-gray-500 max-w-[200px]">При покупке от 5 000 сом доставка в пределах Кыргызстана БЕСПЛАТНО.</p>
+                            <!-- Item 2 -->
+                            <div class="flex flex-col items-center">
+                                <div class="mb-4 text-[#ff4d4d]">
+                                    <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.75" />
+                                    </svg>
                                 </div>
+                                <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Бесплатная доставка</h3>
+                                <p class="text-sm text-gray-500 max-w-[200px]">При покупке от 5 000 сом доставка в
+                                    пределах Кыргызстана БЕСПЛАТНО.</p>
+                            </div>
 
-                                <!-- Item 3 -->
-                                <div class="flex flex-col items-center">
-                                    <div class="mb-4 text-[#ff4d4d]">
-                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Самые лучшие цены</h3>
-                                    <p class="text-sm text-gray-500 max-w-[200px]">Гарантируем самые низкие цены и самые лучшие условия.</p>
+                            <!-- Item 3 -->
+                            <div class="flex flex-col items-center">
+                                <div class="mb-4 text-[#ff4d4d]">
+                                    <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                    </svg>
                                 </div>
+                                <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Самые лучшие цены</h3>
+                                <p class="text-sm text-gray-500 max-w-[200px]">Гарантируем самые низкие цены и самые
+                                    лучшие условия.</p>
+                            </div>
 
-                                <!-- Item 4 -->
-                                <div class="flex flex-col items-center">
-                                    <div class="mb-4 text-[#ff4d4d]">
-                                        <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.075m-1.726 4.415l-.944-4.635c-.06-.296-.448-.428-.703-.236l-.825.616M6.75 5.25a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z" />
-                                        </svg>
-                                    </div>
-                                    <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Сервисный центр</h3>
-                                    <p class="text-sm text-gray-500 max-w-[200px]">Бесплатная сборка и настройка. Обслуживание и ремонт.</p>
+                            <!-- Item 4 -->
+                            <div class="flex flex-col items-center">
+                                <div class="mb-4 text-[#ff4d4d]">
+                                    <svg class="h-14 w-14 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        stroke-width="1.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.075m-1.726 4.415l-.944-4.635c-.06-.296-.448-.428-.703-.236l-.825.616M6.75 5.25a2.25 2.25 0 104.5 0 2.25 2.25 0 00-4.5 0z" />
+                                    </svg>
                                 </div>
+                                <h3 class="mb-3 text-lg font-bold text-[#5bc0de]">Сервисный центр</h3>
+                                <p class="text-sm text-gray-500 max-w-[200px]">Бесплатная сборка и настройка.
+                                    Обслуживание и ремонт.</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div><!-- End Catalog Page -->
 
         <!-- Product Page -->
@@ -1046,7 +1324,8 @@
         <div class="container-custom">
             <div class="flex items-center justify-center gap-2 md:gap-4 mb-8 px-4 md:px-0">
                 <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
-                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#66CC66] text-center px-2 md:px-0">НАШИ ОТЗЫВЫ В 2ГИС</h2>
+                <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#66CC66] text-center px-2 md:px-0">НАШИ
+                    ОТЗЫВЫ В 2ГИС</h2>
                 <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
             </div>
             <review-lab data-widgetid="696393614994ec93411fd7eb"></review-lab>
@@ -1061,12 +1340,21 @@
             <div class="mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Как нас найти?</h2>
                 <div class="w-full rounded-lg overflow-hidden shadow-lg" style="height:600px;">
-                    <a class="dg-widget-link" href="http://2gis.kg/bishkek/firm/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть на карте Бишкека</a>
-                    <div class="dg-widget-link"><a href="http://2gis.kg/bishkek/firm/70000001103438226/photos/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии компании</a></div>
-                    <div class="dg-widget-link"><a href="http://2gis.kg/bishkek/center/74.613715,42.847593/zoom/16/routeTab/rsType/bus/to/74.613715,42.847593╎Top riding, магазин по продаже электросамокатов, электробайков и электровелосипедов?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти проезд до Top riding, магазин по продаже электросамокатов, электробайков и электровелосипедов</a></div>
+                    <a class="dg-widget-link"
+                        href="http://2gis.kg/bishkek/firm/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть
+                        на карте Бишкека</a>
+                    <div class="dg-widget-link"><a
+                            href="http://2gis.kg/bishkek/firm/70000001103438226/photos/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии
+                            компании</a></div>
+                    <div class="dg-widget-link"><a
+                            href="http://2gis.kg/bishkek/center/74.613715,42.847593/zoom/16/routeTab/rsType/bus/to/74.613715,42.847593╎Top riding, магазин по продаже электросамокатов, электробайков и электровелосипедов?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти
+                            проезд до Top riding, магазин по продаже электросамокатов, электробайков и
+                            электровелосипедов</a></div>
                     <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
-                    <script charset="utf-8">new DGWidgetLoader({"width":"100%","height":600,"borderColor":"#a3a3a3","pos":{"lat":42.84843958164126,"lon":74.61371183395387,"zoom":16},"opt":{"city":"bishkek"},"org":[{"id":"70000001103438226"}]});</script>
-                    <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript. Включите его в настройках вашего браузера.</noscript>
+                    <script
+                        charset="utf-8">new DGWidgetLoader({ "width": "100%", "height": 600, "borderColor": "#a3a3a3", "pos": { "lat": 42.84843958164126, "lon": 74.61371183395387, "zoom": 16 }, "opt": { "city": "bishkek" }, "org": [{ "id": "70000001103438226" }] });</script>
+                    <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript.
+                        Включите его в настройках вашего браузера.</noscript>
                 </div>
             </div>
         </div>
@@ -1075,30 +1363,41 @@
     <!-- Footer -->
     <footer class="bg-[#F8F9FA] pt-12 pb-10 border-t border-gray-200">
         <div class="container-custom flex flex-col lg:flex-row justify-between items-start lg:gap-10">
-            
+
             <!-- Col 1: Contacts -->
             <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none pb-4 lg:pb-0">
-                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group"
+                    onclick="toggleFooter(this)">
                     <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Наши контакты</h5>
-                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </button>
                 <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
                     <ul class="space-y-4 text-[14px] text-[#555]">
                         <li class="flex items-start gap-3">🏠 Бишкек, Каралаева 40/4 (Южный парк)</li>
-                        <li class="flex items-center gap-3">📞 <a href="tel:0508708408" class="hover:text-[#66CC33]">0508 708 408</a></li>
-                        <li class="flex items-center gap-3">💬 <a href="https://wa.me/996508708408" class="hover:text-[#66CC33]">0508 708 408</a></li>
+                        <li class="flex items-center gap-3">📞 <a href="tel:0508708408"
+                                class="hover:text-[#66CC33]">0508 708 408</a></li>
+                        <li class="flex items-center gap-3">💬 <a href="https://wa.me/996508708408"
+                                class="hover:text-[#66CC33]">0508 708 408</a></li>
                         <li class="flex items-center gap-3">✉️ sales@topriding.kg</li>
                         <li class="flex items-start gap-3">🕒 Ежедневно: 11:00 - 19:00</li>
-                        <li class="flex items-center gap-3 pt-2 font-medium">🌐 <a href="https://topriding.kg" class="text-blue-500 hover:underline">topriding.kg</a></li>
+                        <li class="flex items-center gap-3 pt-2 font-medium">🌐 <a href="https://topriding.kg"
+                                class="text-blue-500 hover:underline">topriding.kg</a></li>
                     </ul>
                 </div>
             </div>
 
             <!-- Col 2: Company -->
             <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none py-4 lg:py-0">
-                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group"
+                    onclick="toggleFooter(this)">
                     <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Компания</h5>
-                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </button>
                 <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
                     <ul class="space-y-3 text-[14px] text-[#555]">
@@ -1115,29 +1414,41 @@
 
             <!-- Col 3: Payment -->
             <div class="w-full lg:flex-1 border-b border-gray-200 lg:border-none py-4 lg:py-0">
-                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group"
+                    onclick="toggleFooter(this)">
                     <h5 class="font-bold text-[16px] text-[#333] uppercase tracking-tight">Принимаем к оплате</h5>
-                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </button>
                 <div class="hidden lg:block mt-4 lg:mt-6 footer-content">
                     <div class="flex flex-col gap-2 max-w-[240px]">
-                        <a href="https://mbank.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                        <a href="https://mbank.kg/" target="_blank"
+                            class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
                             <img src="assets/images/mbank.svg" alt="mBank" class="h-full w-full object-contain p-2">
                         </a>
-                        <a href="https://optimabank.kg/ru/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
-                            <img src="assets/images/optima24.svg" alt="Optima24" class="h-full w-full object-contain p-2">
+                        <a href="https://optimabank.kg/ru/" target="_blank"
+                            class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                            <img src="assets/images/optima24.svg" alt="Optima24"
+                                class="h-full w-full object-contain p-2">
                         </a>
                         <div class="grid grid-cols-2 gap-2 h-[54px]">
-                            <a href="https://obank.kg/ru" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
+                            <a href="https://obank.kg/ru" target="_blank"
+                                class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
                                 <img src="assets/images/o_m.svg" alt="О!Деньги" class="h-full w-full object-cover">
                             </a>
-                            <a href="https://megapay.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
+                            <a href="https://megapay.kg/" target="_blank"
+                                class="block bg-white border border-gray-100 rounded shadow-sm hover:shadow-md transition overflow-hidden">
                                 <img src="assets/images/megapay.svg" alt="MegaPay" class="h-full w-full object-cover">
                             </a>
                         </div>
-                        <a href="https://balance.kg/" target="_blank" class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
+                        <a href="https://balance.kg/" target="_blank"
+                            class="block bg-white border border-gray-100 rounded shadow-sm h-[54px] hover:shadow-md transition">
                             <!-- Balance placeholder since SVG missing in list but requested -->
-                            <div class="h-full w-full flex items-center justify-center font-bold text-black text-xl bg-yellow-400">Balance</div>
+                            <div
+                                class="h-full w-full flex items-center justify-center font-bold text-black text-xl bg-yellow-400">
+                                Balance</div>
                         </a>
                     </div>
                     <p class="mt-4 text-[12px] text-gray-400">А также, переводы и наличные</p>
@@ -1146,24 +1457,35 @@
 
             <!-- Col 4: Socials -->
             <div class="w-full lg:flex-1 py-4 lg:py-0">
-                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group" onclick="toggleFooter(this)">
-                    <h5 class="font-bold text-[16px] text-[#333] mb-0 lg:mb-6 uppercase tracking-tight">Мы в соцсетях</h5>
-                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                <button class="w-full flex justify-between items-center py-2 lg:py-0 text-left lg:cursor-default group"
+                    onclick="toggleFooter(this)">
+                    <h5 class="font-bold text-[16px] text-[#333] mb-0 lg:mb-6 uppercase tracking-tight">Мы в соцсетях
+                    </h5>
+                    <svg class="w-5 h-5 text-gray-500 lg:hidden transition-transform duration-200 group-[.active]:rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
                 </button>
                 <div class="hidden lg:block mt-4 lg:mt-0 footer-content">
                     <div class="flex gap-2 mb-8">
-                        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden">
+                        <a href="#"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden">
                             <img src="assets/images/facebook.png" alt="Facebook" class="w-full h-full object-contain">
                         </a>
-                        <a href="#" class="w-9 h-9 bg-black rounded-full flex items-center justify-center text-white text-sm font-bold hover:opacity-80">𝕏</a>
-                        <a href="https://instagram.com/top.riding" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden bg-white p-1">
-                            <img src="assets/images/Instagram_logo_2022.svg.webp" alt="Instagram" class="w-full h-full object-contain">
+                        <a href="#"
+                            class="w-9 h-9 bg-black rounded-full flex items-center justify-center text-white text-sm font-bold hover:opacity-80">𝕏</a>
+                        <a href="https://instagram.com/top.riding" target="_blank" rel="noopener noreferrer"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden bg-white p-1">
+                            <img src="assets/images/Instagram_logo_2022.svg.webp" alt="Instagram"
+                                class="w-full h-full object-contain">
                         </a>
-                        <a href="#" class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden">
-                            <img src="assets/images/youtube.jpg" alt="YouTube" class="w-full h-full object-contain rounded-full">
+                        <a href="#"
+                            class="w-9 h-9 rounded-full flex items-center justify-center hover:opacity-80 overflow-hidden">
+                            <img src="assets/images/youtube.jpg" alt="YouTube"
+                                class="w-full h-full object-contain rounded-full">
                         </a>
                     </div>
-                    
+
                     <div class="bg-white border border-gray-100 p-3 rounded shadow-sm inline-block">
                         <div class="flex items-center gap-2">
                             <span class="text-[12px] font-bold text-gray-400">Оценка в 2ГИС</span>
@@ -1181,23 +1503,32 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/996508708408" class="fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
+    <a href="https://wa.me/996508708408"
+        class="fixed bottom-6 right-6 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition z-50">
         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="white" viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
         </svg>
     </a>
 
     <!-- Quick View Modal -->
-    <div id="quick-view-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div id="quick-view-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="modal-title"
+        role="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <!-- Background overlay -->
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeQuickView()"></div>
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="closeQuickView()"></div>
 
             <!-- Modal panel -->
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full relative">
-                <button onclick="closeQuickView()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 z-10">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full relative">
+                <button onclick="closeQuickView()"
+                    class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 z-10">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
                 <div id="quick-view-content" class="bg-white">
                     <!-- Content injected by JS -->
@@ -1207,17 +1538,24 @@
     </div>
 
     <!-- Mobile Filters Modal -->
-    <div id="mobile-filters-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="filters-title" role="dialog" aria-modal="true">
+    <div id="mobile-filters-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="filters-title" role="dialog"
+        aria-modal="true">
         <!-- Background overlay -->
-        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeMobileFilters()"></div>
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+            onclick="closeMobileFilters()"></div>
 
         <!-- Modal panel - slides from right -->
-        <div class="fixed right-0 top-0 h-full w-[85%] max-w-[320px] bg-white shadow-xl transform transition-transform duration-300 ease-in-out overflow-y-auto" style="transform: translateX(0);">
+        <div class="fixed right-0 top-0 h-full w-[85%] max-w-[320px] bg-white shadow-xl transform transition-transform duration-300 ease-in-out overflow-y-auto"
+            style="transform: translateX(0);">
             <!-- Header -->
-            <div class="bg-white px-6 py-4 flex items-center justify-between border-b border-gray-200 sticky top-0 z-10">
+            <div
+                class="bg-white px-6 py-4 flex items-center justify-between border-b border-gray-200 sticky top-0 z-10">
                 <h2 class="text-xl font-bold text-gray-900">Фильтры</h2>
                 <button onclick="closeMobileFilters()" class="text-gray-400 hover:text-gray-500">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
 
@@ -1229,19 +1567,25 @@
     </div>
 
     <!-- Cart Modal -->
-    <div id="cart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="cart-title" role="dialog" aria-modal="true">
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden overflow-y-auto" aria-labelledby="cart-title" role="dialog"
+        aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <!-- Background overlay -->
-            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" onclick="closeCart()"></div>
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"
+                onclick="closeCart()"></div>
 
             <!-- Modal panel -->
             <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-            <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full relative max-h-[90vh] flex flex-col">
+            <div
+                class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full relative max-h-[90vh] flex flex-col">
                 <!-- Header -->
                 <div class="bg-[#002855] px-6 py-4 flex items-center justify-between">
                     <h2 class="text-xl font-bold text-white">Корзина (<span id="cart-modal-count">0</span>)</h2>
                     <button onclick="closeCart()" class="text-white hover:text-gray-300">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
                     </button>
                 </div>
 
@@ -1257,10 +1601,12 @@
                         <span id="cart-total" class="text-2xl font-bold text-[#002855]">0 сом</span>
                     </div>
                     <div class="flex gap-3">
-                        <button onclick="clearCart()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded transition">
+                        <button onclick="clearCart()"
+                            class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded transition">
                             Очистить корзину
                         </button>
-                        <button onclick="checkoutCart()" class="flex-1 bg-[#66CC33] hover:bg-[#57b32c] text-white font-bold py-3 px-6 rounded transition uppercase">
+                        <button onclick="checkoutCart()"
+                            class="flex-1 bg-[#66CC33] hover:bg-[#57b32c] text-white font-bold py-3 px-6 rounded transition uppercase">
                             Оформить заказ
                         </button>
                     </div>
@@ -1273,4 +1619,5 @@
     <script src="data/products.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
