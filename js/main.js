@@ -962,7 +962,7 @@ function renderProductPage(product, container, isModal = false) {
 
                     ${product.brand ? `<div class="mb-6"><span class="text-2xl font-black text-gray-900 italic">${product.brand}</span></div>` : ''}
 
-                    <div class="prose prose-sm text-gray-600 mb-8 max-h-[200px] overflow-y-auto ${isModal ? '' : 'lg:max-h-none'}">
+                    <div class="prose prose-sm text-gray-600 mb-8 max-h-[200px] overflow-y-auto ${isModal ? '' : 'lg:max-h-none'}" style="word-wrap: break-word; overflow-wrap: break-word; word-break: break-word;">
                         ${product.description || 'Описание отсутствует.'}
                     </div>
 
@@ -1198,10 +1198,10 @@ function renderProducts(productsToRender) {
             <!-- Content Section -->
             <div class="p-2 flex flex-col flex-1">
                 <!-- Category -->
-                <div class="mb-0.5 text-[9px] text-gray-500 uppercase tracking-wider">${getCategoryName(product.category)}</div>
+                <div class="mb-0.5 text-[9px] text-gray-500 uppercase tracking-wider text-center">${getCategoryName(product.category)}</div>
                 
                 <!-- Title -->
-                <h3 class="text-[12px] font-medium text-gray-900 mb-1 leading-tight line-clamp-2 min-h-[32px]">${product.title}</h3>
+                <h3 class="text-[12px] font-medium text-gray-900 mb-1 leading-tight line-clamp-2 min-h-[32px] text-center">${product.title}</h3>
                 
                 <!-- Rating -->
                 <div class="flex items-center justify-center gap-1 mb-1">
