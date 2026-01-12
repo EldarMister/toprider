@@ -98,12 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Рендер начального списка с учетом категории из URL
         applyFilters();
         // Прокрутка к каталогу товаров при переходе на категорию из URL
-        setTimeout(() => {
-            const grid = document.getElementById('products-grid');
-            if (grid) {
-                grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }, 100);
+        // setTimeout(() => {
+        //     const grid = document.getElementById('products-grid');
+        //     if (grid) {
+        //         grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        //     }
+        // }, 100);
     } else {
         // Если категория не указана в URL, показываем карточки категорий и не показываем товары
         filterState.category = 'all';
