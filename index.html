@@ -49,7 +49,7 @@
         "email": "sales@topriding.kg",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Каралаева 40/4",
+            "streetAddress": "Бишкек, Ахунбаева 60/2",
             "addressLocality": "Бишкек",
             "addressCountry": "KG"
         },
@@ -458,7 +458,7 @@
                 class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
                 <div class="text-center">
                     <div class="text-red-500 text-xl mb-1">📍</div>
-                    <p>Бишкек,<br>Каралаева 40/4</p>
+                    <p>Бишкек,<br>Ахунбаева 60/2</p>
                 </div>
                 <div class="text-center">
                     <div class="text-red-500 text-xl mb-1 flex items-center justify-center gap-1">
@@ -482,10 +482,11 @@
     </header>
 
     <!-- Promo Banner -->
-    <div class="bg-[#FFD700] py-2 px-4 text-center w-full flex items-center justify-center"
-        style="border: none; border-bottom: none;">
-        <p class="text-black font-extrabold text-sm md:text-lg uppercase tracking-tight m-0 leading-tight"
-            style="text-decoration: none; border: none; border-bottom: none;">ЗАБЕРИ САМОКАТ СЕЙЧАС И<br>ПЛАТИ ПО 299
+    <div class="bg-[#FFD700] pt-3 pb-2 px-4 text-center w-full flex items-center justify-center border-0 outline-none shadow-none ring-0"
+        style="border: none !important; border-bottom: none !important; outline: none; box-shadow: none;">
+        <p class="text-black font-extrabold text-sm md:text-lg uppercase tracking-tight m-0 leading-tight pt-1 border-0 outline-none shadow-none ring-0 no-underline"
+            style="text-decoration: none !important; border: none !important; border-bottom: none !important; outline: none;">
+            ЗАБЕРИ САМОКАТ СЕЙЧАС И<br>ПЛАТИ ПО 299
             СОМ В ДЕНЬ!</p>
     </div>
 
@@ -502,6 +503,8 @@
                         Электровелосипеды</li>
                     <li onclick="filterByCategory('accessories')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">
                         Аксессуары</li>
+                    <li onclick="filterByCategory('repair')" class="px-5 py-4 hover:bg-[#001f42] cursor-pointer">
+                        Ремонт</li>
                     <li onclick="showCatalog()" class="px-5 py-4 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">
                         Рассрочка</li>
                     <li onclick="openCart()"
@@ -557,6 +560,8 @@
                         Электровелосипеды</li>
                     <li onclick="filterByCategory('accessories'); document.getElementById('mobileMenu').classList.add('hidden');"
                         class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Аксессуары</li>
+                    <li onclick="filterByCategory('repair'); document.getElementById('mobileMenu').classList.add('hidden');"
+                        class="px-4 py-3 border-b border-[#ffffff10] hover:bg-[#001f42] cursor-pointer">Ремонт</li>
                     <li onclick="showCatalog(); document.getElementById('mobileMenu').classList.add('hidden');"
                         class="px-4 py-3 text-[#FFD700] hover:bg-[#001f42] cursor-pointer">Рассрочка</li>
                 </ul>

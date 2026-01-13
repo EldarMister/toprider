@@ -28,7 +28,7 @@ let filterState = {
 
 // Пагинация и отображение
 let currentPage = 1;
-let itemsPerPage = 12;
+let itemsPerPage = 30;
 let viewMode = 'grid'; // 'grid' or 'list'
 let sortBy = 'newest'; // 'newest', 'price-asc', 'price-desc', 'name-asc'
 
@@ -123,6 +123,7 @@ function getCategoryName(cat) {
         'electro_scooters': 'Электросамокаты',
         'electro_bikes': 'Электробайки',
         'accessories': 'Аксессуары',
+        'repair': 'Ремонт',
         'winter': 'Зимние товары'
     };
     return names[cat] || cat;
@@ -1506,6 +1507,7 @@ function setupCategorySelect() {
             { value: 'electro_scooters', name: 'Электросамокаты' },
             { value: 'electro_bikes', name: 'Электробайки' },
             { value: 'accessories', name: 'Аксессуары' },
+            { value: 'repair', name: 'Ремонт' },
             { value: 'winter', name: 'Зимние товары' }
         ];
 
@@ -1545,6 +1547,7 @@ function setupMobileFilters() {
                 { value: 'electro_scooters', name: 'Электросамокаты' },
                 { value: 'electro_bikes', name: 'Электробайки' },
                 { value: 'accessories', name: 'Аксессуары' },
+                { value: 'repair', name: 'Ремонт' },
                 { value: 'winter', name: 'Зимние товары' }
             ];
 
