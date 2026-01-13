@@ -1221,8 +1221,8 @@ function renderProducts(productsToRender) {
     }
 
     const bannerHtml = `
-        <div class="col-span-full bg-[#FFD700] py-3 px-4 text-center font-black text-black text-xs md:text-base uppercase tracking-tight w-full" style="background: #FFD700;">
-            <span>Забери самокат сейчас и плати всего 299 СОМ в день!</span>
+        <div class="col-span-full w-full">
+            <img src="assets/images/banner.png" alt="Promo Banner" class="w-full h-auto object-cover">
         </div>
     `;
 
