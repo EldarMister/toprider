@@ -448,15 +448,16 @@
         <div class="container-custom flex flex-col lg:flex-row justify-between items-center gap-4">
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <div onclick="showHome()"
-                    class="text-3xl font-black text-[#002855] tracking-tighter italic cursor-pointer hover:opacity-80 transition">
-                    Topriding<span class="text-red-600">.kg</span></div>
+                <a href="index.html"
+                    class="text-3xl font-black text-[#002855] tracking-tighter italic hover:opacity-80 transition">
+                    Topriding<span class="text-red-600">.kg</span></a>
             </div>
 
             <!-- Contacts (Visible on mobile now) -->
             <div
                 class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
-                <div class="text-center">
+                <a href="https://2gis.kg/bishkek/geo/70000001103438226" target="_blank"
+                    class="text-center hover:opacity-80 transition block">
                     <div class="mb-1 flex justify-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-red-600"
                             viewBox="0 0 24 24">
@@ -465,7 +466,7 @@
                         </svg>
                     </div>
                     <p>Бишкек,<br>Ахунбаева 60/2</p>
-                </div>
+                </a>
                 <div class="text-center">
                     <div class="text-blue-600 text-xl mb-1 flex items-center justify-center gap-1">
                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -584,12 +585,12 @@
         <div id="catalog-page" class="container-custom">
             <!-- Title & Breadcrumbs -->
             <!-- Title & Breadcrumbs -->
-            <div class="mb-10 text-left">
+            <div class="mb-10 text-center">
                 <div class="relative inline-block mb-2">
                     <h1 id="page-title" class="text-2xl md:text-3xl font-bold text-[#002855]">Категории</h1>
-                    <div id="title-underline" class="h-[3px] bg-[#66CC66] w-2/3 mt-1"></div>
+                    <div id="title-underline" class="h-[3px] bg-[#66CC66] w-1/2 mt-1 mx-auto"></div>
                 </div>
-                <div id="breadcrumbs" class="mt-2 flex gap-2 text-sm text-gray-500 hidden">
+                <div id="breadcrumbs" class="mt-2 flex justify-center gap-2 text-sm text-gray-500 hidden">
                     <a href="#" onclick="showHome(); event.preventDefault();" class="hover:text-gray-900">Главная</a>
                     <span>/</span>
                     <span id="breadcrumb-current" class="text-gray-900"></span>
@@ -1144,7 +1145,7 @@
                                     </path>
                                 </svg>
                             </button>
-                            <span class="font-bold text-gray-900">Электровелосипеды</span>
+                            <!-- Category label removed as per user request -->
                             <span
                                 class="text-sm text-gray-400 pl-2 border-l border-gray-300 ml-2 hidden sm:inline">Showing
                                 1–12 Products of 159 Products</span>
