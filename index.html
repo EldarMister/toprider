@@ -457,7 +457,13 @@
             <div
                 class="grid grid-cols-3 lg:flex lg:items-center gap-2 lg:gap-4 text-[12px] font-bold text-[#002855] w-full lg:w-auto justify-items-center lg:justify-items-start">
                 <div class="text-center">
-                    <div class="text-red-500 text-xl mb-1">📍</div>
+                    <div class="mb-1 flex justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-red-600"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                    </div>
                     <p>Бишкек,<br>Ахунбаева 60/2</p>
                 </div>
                 <div class="text-center">
@@ -565,26 +571,28 @@
     </nav>
 
     <!-- Promo Banner -->
-    <div class="container-custom my-4">
-        <div class="w-full">
-            <img src="assets/images/banner.png" alt="Promo Banner" class="w-full h-auto object-cover rounded-lg">
+    <section class="container-custom my-4 md:my-8 px-4 md:px-0">
+        <div class="w-full relative rounded-lg overflow-hidden shadow-md">
+            <img id="main-banner-img" src="assets/images/banner.png" alt="Рекламный баннер"
+                class="w-full h-auto object-cover">
         </div>
-    </div>
+    </section>
 
     <!-- Main Content -->
     <main id="main-content" class="bg-white pb-12 pt-8">
         <!-- Catalog Page -->
         <div id="catalog-page" class="container-custom">
             <!-- Title & Breadcrumbs -->
-            <div class="mb-10 text-center">
-                <h1 class="text-4xl font-bold text-gray-900">Электровелосипеды</h1>
-                <div class="mt-3 flex justify-center gap-2 text-sm text-gray-500">
+            <!-- Title & Breadcrumbs -->
+            <div class="mb-10 text-left">
+                <div class="relative inline-block mb-2">
+                    <h1 id="page-title" class="text-2xl md:text-3xl font-bold text-[#002855]">Категории</h1>
+                    <div id="title-underline" class="h-[3px] bg-[#66CC66] w-2/3 mt-1"></div>
+                </div>
+                <div id="breadcrumbs" class="mt-2 flex gap-2 text-sm text-gray-500 hidden">
                     <a href="#" onclick="showHome(); event.preventDefault();" class="hover:text-gray-900">Главная</a>
                     <span>/</span>
-                    <a href="#" onclick="openCatalogView(); event.preventDefault();" class="hover:text-gray-900">Каталог
-                        товаров</a>
-                    <span>/</span>
-                    <span class="text-gray-900">Электровелосипеды</span>
+                    <span id="breadcrumb-current" class="text-gray-900"></span>
                 </div>
             </div>
 
@@ -1186,55 +1194,61 @@
 
                     <!-- Categories Navigation Grid -->
                     <div id="categories-grid"
-                        class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 mb-8 w-full">
+                        class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8 w-full">
                         <!-- Электросамокаты -->
                         <div onclick="filterByCategory('electro_scooters')"
-                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
-                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGT55pkYMjzqshVFvtMw7cgQPTPcpVm6lOAQ&s');">
+                            class="cursor-pointer group flex flex-col items-center">
+                            <div class="w-full aspect-square bg-[#f5f5f5] rounded-lg overflow-hidden mb-3 relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    style="background-image: url('assets/images/электросамокат.jpg');">
+                                </div>
                             </div>
-                            <div
-                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">
-                                    Электросамокаты</h3>
-                            </div>
+                            <h3
+                                class="text-sm md:text-base font-bold text-gray-900 text-center uppercase tracking-wide group-hover:text-[#00a0a0] transition-colors">
+                                Электросамокаты
+                            </h3>
                         </div>
 
                         <!-- Электробайки -->
                         <div onclick="filterByCategory('electro_bikes')"
-                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
-                                style="background-image: url('https://formand.ru/image/cache/data/electric-scooters/caigiees-harley-max/elektrobayk-caigiees-harley-max-foto-01-1000x750.jpg');">
+                            class="cursor-pointer group flex flex-col items-center">
+                            <div class="w-full aspect-square bg-[#f5f5f5] rounded-lg overflow-hidden mb-3 relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    style="background-image: url('https://cdn.shopify.com/s/files/1/0274/6076/3761/files/fiido-titan_600x600.jpg?v=1725450168');">
+                                </div>
                             </div>
-                            <div
-                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Электробайки
-                                </h3>
-                            </div>
+                            <h3
+                                class="text-sm md:text-base font-bold text-gray-900 text-center uppercase tracking-wide group-hover:text-[#00a0a0] transition-colors">
+                                Электробайки
+                            </h3>
                         </div>
 
                         <!-- Электровелосипеды -->
                         <div onclick="filterByCategory('bicycles')"
-                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
-                                style="background-image: url('assets/images/электровелосипед.jpg');"></div>
-                            <div
-                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">
-                                    Электровелосипеды</h3>
+                            class="cursor-pointer group flex flex-col items-center">
+                            <div class="w-full aspect-square bg-[#f5f5f5] rounded-lg overflow-hidden mb-3 relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    style="background-image: url('assets/images/электровелосипед.png');">
+                                </div>
                             </div>
+                            <h3
+                                class="text-sm md:text-base font-bold text-gray-900 text-center uppercase tracking-wide group-hover:text-[#00a0a0] transition-colors">
+                                Электровелосипеды
+                            </h3>
                         </div>
 
                         <!-- Аксессуары -->
                         <div onclick="filterByCategory('accessories')"
-                            class="cursor-pointer group relative flex aspect-[4/3] flex-col items-center justify-center overflow-hidden bg-white text-center hover:shadow-lg transition-shadow rounded-lg border border-gray-200">
-                            <div class="mb-4 h-full w-full bg-cover bg-center opacity-90 group-hover:scale-105 transition-transform duration-500"
-                                style="background-image: url('assets/images/акксесуары.jpg');"></div>
-                            <div
-                                class="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/30 transition-colors p-4">
-                                <h3 class="text-sm md:text-xl font-bold text-white uppercase tracking-wide">Аксессуары
-                                </h3>
+                            class="cursor-pointer group flex flex-col items-center">
+                            <div class="w-full aspect-square bg-[#f5f5f5] rounded-lg overflow-hidden mb-3 relative">
+                                <div class="w-full h-full bg-cover bg-center group-hover:scale-110 transition-transform duration-500"
+                                    style="background-image: url('assets/images/акксесуары.jpg');">
+                                </div>
                             </div>
+                            <h3
+                                class="text-sm md:text-base font-bold text-gray-900 text-center uppercase tracking-wide group-hover:text-[#00a0a0] transition-colors">
+                                Аксессуары
+                            </h3>
                         </div>
                     </div>
 
@@ -1333,6 +1347,23 @@
         </div>
     </main>
 
+    <!-- PROMOTIONS BLOCK -->
+    <!-- EDITABLE IMAGE: Change the src attribute below to update the banner -->
+    <section id="promotion-block" class="container-custom my-12">
+        <!-- Header -->
+        <div class="flex items-center justify-center gap-2 md:gap-4 mb-8 px-4 md:px-0">
+            <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold text-[#66CC66] text-center px-2 md:px-0">АКЦИИ</h2>
+            <div class="hidden md:block flex-1 h-px bg-[#66CC66]"></div>
+        </div>
+        <!-- Banner -->
+        <div
+            class="w-full h-[300px] md:h-[450px] lg:h-[500px] rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+            <img id="promo-banner-img" src="assets/images/promotion_banner.png" alt="Акция"
+                class="w-full h-full object-cover">
+        </div>
+    </section>
+
     <!-- ReviewLab Widget -->
     <section class="bg-white py-12">
         <div class="container-custom">
@@ -1353,23 +1384,25 @@
             <!-- Map -->
             <div class="mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Как нас найти?</h2>
-                <div class="w-full rounded-lg overflow-hidden shadow-lg" style="height:600px;">
-                    <a class="dg-widget-link"
-                        href="http://2gis.kg/bishkek/firm/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/16?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=bigMap">Посмотреть
-                        на карте Бишкека</a>
-                    <div class="dg-widget-link"><a
-                            href="http://2gis.kg/bishkek/firm/70000001103438226/photos/70000001103438226/center/74.61371183395387,42.84843958164126/zoom/17?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=photos">Фотографии
-                            компании</a></div>
-                    <div class="dg-widget-link"><a
-                            href="http://2gis.kg/bishkek/center/74.613715,42.847593/zoom/16/routeTab/rsType/bus/to/74.613715,42.847593╎Top riding, магазин по продаже электросамокатов, электробайков и электровелосипедов?utm_medium=widget-source&utm_campaign=firmsonmap&utm_source=route">Найти
-                            проезд до Top riding, магазин по продаже электросамокатов, электробайков и
-                            электровелосипедов</a></div>
-                    <script charset="utf-8" src="https://widgets.2gis.com/js/DGWidgetLoader.js"></script>
-                    <script
-                        charset="utf-8">new DGWidgetLoader({ "width": "100%", "height": 600, "borderColor": "#a3a3a3", "pos": { "lat": 42.84843958164126, "lon": 74.61371183395387, "zoom": 16 }, "opt": { "city": "bishkek" }, "org": [{ "id": "70000001103438226" }] });</script>
-                    <noscript style="color:#c00;font-size:16px;font-weight:bold;">Виджет карты использует JavaScript.
-                        Включите его в настройках вашего браузера.</noscript>
-                </div>
+                <div id="map" class="w-full rounded-lg overflow-hidden shadow-lg" style="height:600px;"></div>
+                <script src="https://api-maps.yandex.ru/2.1/?apikey=bb2c8115-e378-4980-a5a8-53109527b5e2&lang=ru_RU"
+                    type="text/javascript"></script>
+                <script type="text/javascript">
+                    ymaps.ready(init);
+                    function init() {
+                        var myMap = new ymaps.Map("map", {
+                            center: [42.848440, 74.613712],
+                            zoom: 17
+                        });
+
+                        var myPlacemark = new ymaps.Placemark([42.848440, 74.613712], {
+                            hintContent: 'Top riding',
+                            balloonContent: 'Бишкек, Ахунбаева 60/2'
+                        });
+
+                        myMap.geoObjects.add(myPlacemark);
+                    }
+                </script>
             </div>
         </div>
     </section>
@@ -1648,7 +1681,9 @@
 
     <!-- Scripts -->
     <script src="data/products.js"></script>
+    <script src="data/banners.js"></script>
     <script src="js/main.js"></script>
 </body>
 
 </html>
+```

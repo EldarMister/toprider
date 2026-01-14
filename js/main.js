@@ -1,6 +1,17 @@
 // Основная логика сайта
 
 // Глобальные переменные
+let productsData = [];
+
+// Применяем баннеры из конфига
+document.addEventListener('DOMContentLoaded', () => {
+    if (typeof banners !== 'undefined') {
+        const mainBannerImg = document.getElementById('main-banner-img');
+        const promoBannerImg = document.getElementById('promo-banner-img');
+        if (mainBannerImg) mainBannerImg.src = banners.mainBanner;
+        if (promoBannerImg) promoBannerImg.src = banners.promoBanner;
+    }
+});
 let currentCategory = 'all';
 let allProducts = [];
 let filteredProducts = [];
@@ -682,9 +693,18 @@ function applyFilters() {
     renderPagination(filtered.length);
 
     // Обновляем заголовок на основе категории
-    const title = document.querySelector('#catalog-page h1.text-4xl');
+    const title = document.getElementById('page-title');
+    const underline = document.getElementById('title-underline');
+    const breadcrumbCurrent = document.getElementById('breadcrumb-current');
+
     if (title) {
-        title.textContent = filterState.category === 'all' ? 'Каталог товаров' : getCategoryName(filterState.category);
+        title.textContent = filterState.category === 'all' ? 'Категории' : getCategoryName(filterState.category);
+    }
+    if (breadcrumbCurrent) {
+        breadcrumbCurrent.textContent = getCategoryName(filterState.category);
+    }
+    if (underline) {
+        underline.classList.toggle('hidden', filterState.category !== 'all');
     }
 
     // Обновляем текст "Показано X товаров"
@@ -714,12 +734,14 @@ function showHome() {
     // Скрыть товары и показать грид категорий
     const categoriesGrid = document.getElementById('categories-grid');
     const productsGrid = document.getElementById('products-grid');
-    const breadcrumbs = document.querySelector('.mb-10.text-center');
+    const breadcrumbs = document.getElementById('breadcrumbs');
+    const underline = document.getElementById('title-underline');
     const sidebar = document.querySelector('aside');
 
     if (categoriesGrid) categoriesGrid.classList.remove('hidden');
     if (productsGrid) productsGrid.classList.add('hidden');
     if (breadcrumbs) breadcrumbs.classList.add('hidden');
+    if (underline) underline.classList.remove('hidden');
     if (sidebar) sidebar.classList.add('hidden');
 
     // Сбросить фильтр категории
@@ -742,7 +764,7 @@ function showCatalog() {
     // Показать товары и скрыть грид категорий
     const categoriesGrid = document.getElementById('categories-grid');
     const productsGrid = document.getElementById('products-grid');
-    const breadcrumbs = document.querySelector('.mb-10.text-center');
+    const breadcrumbs = document.getElementById('breadcrumbs');
     const sidebar = document.querySelector('aside');
 
     if (categoriesGrid) categoriesGrid.classList.add('hidden');

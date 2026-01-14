@@ -9,17 +9,31 @@ document.addEventListener('DOMContentLoaded', () => {
     renderTable();
     // Добавляем первое поле для изображения
     addImageField();
+    // Инициализация баннеров
+    initBanners();
 });
+
+function initBanners() {
+    if (typeof banners !== 'undefined') {
+        updateBannerPreview('mainBanner', banners.mainBanner);
+        updateBannerPreview('promoBanner', banners.promoBanner);
+        document.getElementById('url-mainBanner').value = banners.mainBanner.startsWith('data:') ? '' : banners.mainBanner;
+        document.getElementById('url-promoBanner').value = banners.promoBanner.startsWith('data:') ? '' : banners.promoBanner;
+    }
+}
 
 // Навигация
 function showSection(sectionId) {
     document.getElementById('section-list').classList.add('hidden');
     document.getElementById('section-add').classList.add('hidden');
-    
+    document.getElementById('section-banners').classList.add('hidden');
+
     document.getElementById(`section-${sectionId}`).classList.remove('hidden');
 
     if (sectionId === 'add') {
         resetForm();
+    } else if (sectionId === 'banners') {
+        initBanners();
     } else {
         renderTable();
     }
@@ -30,7 +44,7 @@ window.showSection = showSection;
 function renderTable() {
     const tbody = document.getElementById('products-table-body');
     tbody.innerHTML = '';
-    
+
     document.getElementById('total-count').innerText = products.length;
 
     products.forEach(product => {
@@ -70,13 +84,13 @@ function deleteProduct(id) {
 window.deleteProduct = deleteProduct;
 
 // Редактирование
-window.editProduct = function(id) {
+window.editProduct = function (id) {
     const product = products.find(p => p.id === id);
     if (!product) return;
 
     document.getElementById('form-title').innerText = 'Редактировать товар';
     document.getElementById('edit-id').value = product.id;
-    
+
     document.getElementById('inp-title').value = product.title;
     document.getElementById('inp-category').value = product.category;
     document.getElementById('inp-brand').value = product.brand || '';
@@ -140,7 +154,7 @@ function resetForm() {
     document.getElementById('product-form').reset();
     clearSpecs();
     clearFullSpecs();
-    
+
     // Сброс изображений
     const imagesContainer = document.getElementById('images-container');
     imagesContainer.innerHTML = '';
@@ -160,11 +174,11 @@ function addImageField(value = '', isBase64 = false) {
     const index = container.children.length;
     const div = document.createElement('div');
     div.className = 'flex gap-2 items-center';
-    
+
     // Определяем, это base64 или URL
     const imageSrc = isBase64 ? value : value;
     const displayValue = isBase64 ? '[Загружено из галереи]' : value;
-    
+
     div.innerHTML = `
         <input type="${isBase64 ? 'hidden' : 'url'}" class="flex-1 border border-gray-300 rounded-md p-2 image-input" 
                placeholder="https://..." value="${displayValue}" 
@@ -185,7 +199,7 @@ window.addImageField = addImageField;
 function handleFileUpload(event) {
     const files = event.target.files;
     if (files.length === 0) return;
-    
+
     // Предупреждение о размере
     const maxSize = 2 * 1024 * 1024; // 2MB на файл
     const oversizedFiles = Array.from(files).filter(f => f.size > maxSize);
@@ -196,13 +210,13 @@ function handleFileUpload(event) {
             return;
         }
     }
-    
+
     Array.from(files).forEach(file => {
         if (!file.type.startsWith('image/')) {
             alert(`Файл ${file.name} не является изображением!`);
             return;
         }
-        
+
         // Показываем индикатор загрузки
         const loadingDiv = document.createElement('div');
         loadingDiv.className = 'flex gap-2 items-center p-2 bg-blue-50 rounded';
@@ -212,17 +226,17 @@ function handleFileUpload(event) {
         `;
         const container = document.getElementById('images-container');
         container.appendChild(loadingDiv);
-        
+
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             const base64 = e.target.result;
-            
+
             // Оптимизация: сжимаем изображение если оно слишком большое
             compressImage(base64, file.name).then(optimizedBase64 => {
                 loadingDiv.remove();
                 // Добавляем изображение как base64
                 addImageField(optimizedBase64, true);
-                
+
                 // Показываем размер
                 const sizeKB = Math.round(optimizedBase64.length / 1024);
                 if (sizeKB > 500) {
@@ -230,13 +244,13 @@ function handleFileUpload(event) {
                 }
             });
         };
-        reader.onerror = function() {
+        reader.onerror = function () {
             loadingDiv.remove();
             alert(`Ошибка при чтении файла ${file.name}`);
         };
         reader.readAsDataURL(file);
     });
-    
+
     // Очищаем input, чтобы можно было выбрать те же файлы снова
     event.target.value = '';
 }
@@ -246,39 +260,39 @@ window.handleFileUpload = handleFileUpload;
 function compressImage(base64, filename, maxWidth = 4000, quality = 0.98) {
     return new Promise((resolve) => {
         const img = new Image();
-        img.onload = function() {
+        img.onload = function () {
             const canvas = document.createElement('canvas');
             let width = img.width;
             let height = img.height;
-            
+
             // Определяем формат изображения по расширению файла
             const isPng = filename.toLowerCase().endsWith('.png') || base64.startsWith('data:image/png');
             const format = isPng ? 'image/png' : 'image/jpeg';
-            
+
             // Уменьшаем размер только если действительно очень большой
             if (width > maxWidth) {
                 height = (height * maxWidth) / width;
                 width = maxWidth;
             }
-            
+
             canvas.width = width;
             canvas.height = height;
-            
+
             const ctx = canvas.getContext('2d');
-            
+
             // Улучшаем качество рендеринга
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
-            
+
             ctx.drawImage(img, 0, 0, width, height);
-            
+
             // Конвертируем обратно в base64 с максимальным качеством
-            const compressedBase64 = format === 'image/png' 
+            const compressedBase64 = format === 'image/png'
                 ? canvas.toDataURL('image/png') // PNG без сжатия
                 : canvas.toDataURL('image/jpeg', quality); // JPEG с высоким качеством
             resolve(compressedBase64);
         };
-        img.onerror = function() {
+        img.onerror = function () {
             // Если не удалось обработать, возвращаем оригинал
             resolve(base64);
         };
@@ -344,7 +358,7 @@ function clearFullSpecs() {
 
 function getFullSpecs() {
     const fullSpecs = {};
-    
+
     const battery = document.getElementById('fullspec-battery').value.trim();
     const motor = document.getElementById('fullspec-motor').value.trim();
     const peakPower = document.getElementById('fullspec-peakPower').value.trim();
@@ -362,7 +376,7 @@ function getFullSpecs() {
     const lighting = document.getElementById('fullspec-lighting').value.trim();
     const turnSignals = document.getElementById('fullspec-turnSignals').value.trim();
     const emergencyLights = document.getElementById('fullspec-emergencyLights').value.trim();
-    
+
     if (battery) fullSpecs.battery = battery;
     if (motor) fullSpecs.motor = motor;
     if (peakPower) fullSpecs.peakPower = peakPower;
@@ -380,12 +394,12 @@ function getFullSpecs() {
     if (lighting) fullSpecs.lighting = lighting;
     if (turnSignals) fullSpecs.turnSignals = turnSignals;
     if (emergencyLights) fullSpecs.emergencyLights = emergencyLights;
-    
+
     return Object.keys(fullSpecs).length > 0 ? fullSpecs : null;
 }
 
 // Сохранение формы
-document.getElementById('product-form').addEventListener('submit', function(e) {
+document.getElementById('product-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
     const id = document.getElementById('edit-id').value;
@@ -465,22 +479,77 @@ document.getElementById('product-form').addEventListener('submit', function(e) {
     showSection('list');
 });
 
-// Скачивание файла
-window.downloadData = function() {
-    const dataStr = "const products = " + JSON.stringify(products, null, 4) + ";";
-    const blob = new Blob([dataStr], { type: "text/javascript" });
+// Скачивание файлов
+window.downloadData = function () {
+    // 1. products.js
+    const productsData = "const products = " + JSON.stringify(products, null, 4) + ";";
+    downloadFile(productsData, "products.js");
+
+    // 2. banners.js
+    if (typeof banners !== 'undefined') {
+        const bannersData = "const banners = " + JSON.stringify(banners, null, 4) + ";";
+        setTimeout(() => {
+            downloadFile(bannersData, "banners.js");
+        }, 500);
+    }
+};
+
+function downloadFile(content, filename) {
+    const blob = new Blob([content], { type: "text/javascript" });
     const url = URL.createObjectURL(blob);
-    
     const a = document.createElement('a');
     a.href = url;
-    a.download = "products.js";
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
-    
     setTimeout(() => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
     }, 0);
+}
+
+// Управление баннерами
+window.handleBannerUpload = function (event, type) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+        const base64 = e.target.result;
+        compressImage(base64, file.name).then(optimizedBase64 => {
+            updateBannerPreview(type, optimizedBase64);
+            document.getElementById(`url-${type}`).value = ''; // Очищаем поле URL
+        });
+    };
+    reader.readAsDataURL(file);
+};
+
+window.updateBannerPreview = function (type, src) {
+    const preview = document.getElementById(`preview-${type}`);
+    if (src) {
+        preview.innerHTML = `<img src="${src}" class="w-full h-full object-cover">`;
+        preview.dataset.src = src;
+    } else {
+        preview.innerHTML = '<span class="text-xs text-gray-400">Нет фото</span>';
+        delete preview.dataset.src;
+    }
+};
+
+window.saveBannersToMemory = function () {
+    const mainBanner = document.getElementById('preview-mainBanner').dataset.src || document.getElementById('url-mainBanner').value.trim();
+    const promoBanner = document.getElementById('preview-promoBanner').dataset.src || document.getElementById('url-promoBanner').value.trim();
+
+    if (!mainBanner || !promoBanner) {
+        alert('Заполните оба баннера!');
+        return;
+    }
+
+    if (typeof banners !== 'undefined') {
+        banners.mainBanner = mainBanner;
+        banners.promoBanner = promoBanner;
+    }
+
+    alert('Настройки баннеров сохранены в памяти! Не забудьте нажать "Сохранить изменения" слева для скачивания файла.');
 };
 
 // Хелпер
