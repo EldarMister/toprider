@@ -39,7 +39,7 @@ let filterState = {
 
 // Пагинация и отображение
 let currentPage = 1;
-let itemsPerPage = 30;
+let itemsPerPage = 20;
 let viewMode = 'grid'; // 'grid' or 'list'
 let sortBy = 'newest'; // 'newest', 'price-asc', 'price-desc', 'name-asc'
 
@@ -731,7 +731,7 @@ function showHome() {
     document.getElementById('catalog-page').classList.remove('hidden');
     document.getElementById('product-page').classList.add('hidden');
 
-    // Скрыть товары и показать грид категорий
+    // Показать товары и грид категорий (на главной показываем всё)
     const categoriesGrid = document.getElementById('categories-grid');
     const productsGrid = document.getElementById('products-grid');
     const breadcrumbs = document.getElementById('breadcrumbs');
@@ -739,13 +739,15 @@ function showHome() {
     const sidebar = document.querySelector('aside');
 
     if (categoriesGrid) categoriesGrid.classList.remove('hidden');
-    if (productsGrid) productsGrid.classList.add('hidden');
+    if (productsGrid) productsGrid.classList.remove('hidden');
     if (breadcrumbs) breadcrumbs.classList.add('hidden');
     if (underline) underline.classList.remove('hidden');
     if (sidebar) sidebar.classList.add('hidden');
 
-    // Сбросить фильтр категории
+    // Сбросить фильтр категории и обновить отображение
     filterState.category = 'all';
+    currentPage = 1;
+    initializeAllFilters();
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
