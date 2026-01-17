@@ -31,7 +31,7 @@ function showSection(sectionId) {
     document.getElementById(`section-${sectionId}`).classList.remove('hidden');
 
     if (sectionId === 'add') {
-        resetForm();
+        // Form is handled externally by resetForm() or editProduct()
     } else if (sectionId === 'banners') {
         initBanners();
     } else {
@@ -39,6 +39,8 @@ function showSection(sectionId) {
     }
 }
 window.showSection = showSection;
+window.resetForm = resetForm;
+window.renderTable = renderTable;
 
 // Рендер таблицы
 function renderTable() {
