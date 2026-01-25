@@ -1149,7 +1149,8 @@
 
 
                     <!-- Toolbar -->
-                    <div class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                    <div id="catalog-controls"
+                        class="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 pb-4">
                         <div class="flex items-center gap-2">
                             <!-- Mobile Filter Button -->
                             <button onclick="openMobileFilters()"
@@ -1282,7 +1283,7 @@
                     </div>
 
                     <!-- Catalog Header -->
-                    <div class="mb-8 text-center mt-4">
+                    <div id="catalog-header" class="mb-8 text-center mt-4">
                         <div class="relative inline-block mb-2">
                             <h2 class="text-2xl md:text-3xl font-bold text-black uppercase">КАТАЛОГ</h2>
                             <div class="h-[3px] bg-[#66CC66] w-1/2 mt-1 mx-auto"></div>
@@ -1291,6 +1292,151 @@
 
                     <div id="products-grid">
                         <!-- Товары будут загружены через JS -->
+                    </div>
+
+                    <!-- Repair Section Content (Hidden by default) -->
+                    <div id="repair-content" class="hidden w-full max-w-4xl mx-auto py-8 px-4">
+                        <div class="text-center mb-10">
+                            <h1 class="text-3xl md:text-4xl font-extrabold text-[#002855] mb-4">Ремонт электротранспорта
+                                в Бишкеке <span class="text-[#FFD700]">⚡🔧</span></h1>
+                            <p class="text-lg md:text-xl text-gray-700 font-medium">Электросамокаты • Электровелосипеды
+                                • Электромотоциклы</p>
+                        </div>
+
+                        <div class="bg-blue-50 border-l-4 border-blue-600 p-6 mb-10 rounded-r-lg shadow-sm">
+                            <p class="text-lg text-gray-800 leading-relaxed">
+                                Профессиональный ремонт и обслуживание электротранспорта любых брендов и моделей.
+                                <br>Быстро находим неисправность и качесвтенно устраняем её с гарантией.
+                            </p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-10 mb-12">
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <span
+                                        class="bg-[#002855] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm">✓</span>
+                                    Что мы ремонтируем:
+                                </h3>
+                                <ul class="space-y-4">
+                                    <li
+                                        class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                                        <span class="text-2xl">🛴</span>
+                                        <span class="font-bold text-gray-800">Электросамокаты</span>
+                                    </li>
+                                    <li
+                                        class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                                        <span class="text-2xl">🚲</span>
+                                        <span class="font-bold text-gray-800">Электровелосипеды</span>
+                                    </li>
+                                    <li
+                                        class="flex items-center gap-3 bg-white p-4 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                                        <span class="text-2xl">🏍️</span>
+                                        <span class="font-bold text-gray-800">Электромотоциклы <span
+                                                class="text-sm font-normal text-gray-500">(Sur-Ron, Talaria и
+                                                аналоги)</span></span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                                    <span
+                                        class="bg-[#002855] text-white rounded-full w-8 h-8 flex items-center justify-center text-sm">🛠️</span>
+                                    Наши услуги:
+                                </h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Компьютерная диагностика</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Ремонт контроллеров и электроники</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Замена и восстановление аккумуляторов, BMS</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Ремонт моторов, замена датчиков Холла</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Тормозная система (гидравлика, механика)</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Замена шин, камер, покрышек</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Обслуживание подвески и рулевой</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Прошивка, настройка, активация</span>
+                                    </li>
+                                    <li class="flex items-start gap-3">
+                                        <span class="text-blue-600 mt-1">🔹</span>
+                                        <span class="text-gray-700">Устранение люфтов и механических повреждений</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-2xl p-8 mb-12">
+                            <h3 class="text-2xl font-bold text-center text-gray-900 mb-8">Почему выбирают нас:</h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div class="flex flex-col items-center text-center">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-3 text-xl">
+                                        ✔</div>
+                                    <span class="font-bold text-gray-800">Опыт работы</span>
+                                    <span class="text-sm text-gray-500">с электротранспортом</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-3 text-xl">
+                                        ✔</div>
+                                    <span class="font-bold text-gray-800">Запчасти</span>
+                                    <span class="text-sm text-gray-500">Проверенные и оригинальные</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-3 text-xl">
+                                        ✔</div>
+                                    <span class="font-bold text-gray-800">Честные цены</span>
+                                    <span class="text-sm text-gray-500">и прозрачная диагностика</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-3 text-xl">
+                                        ✔</div>
+                                    <span class="font-bold text-gray-800">Гарантия</span>
+                                    <span class="text-sm text-gray-500">на выполненные работы</span>
+                                </div>
+                                <div class="flex flex-col items-center text-center sm:col-span-2 lg:col-span-1">
+                                    <div
+                                        class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 mb-3 text-xl">
+                                        ✔</div>
+                                    <span class="font-bold text-gray-800">Поддержка</span>
+                                    <span class="text-sm text-gray-500">Консультации после ремонта</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <div
+                                class="inline-block bg-[#002855] text-white py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                                <div class="flex items-center gap-3 mb-1 justify-center">
+                                    <span class="text-2xl">📍</span>
+                                    <span class="text-xl font-bold">Работаем в Бишкеке</span>
+                                </div>
+                                <p class="text-blue-100">📞 Обращайтесь — вернём ваш электротранспорт в идеальное
+                                    состояние!</p>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Pagination -->
@@ -1311,7 +1457,7 @@
                     </div>
 
                     <!-- Why Topriding.kg Section -->
-                    <div class="mt-16 border-t border-gray-100 pt-12 pb-4">
+                    <div id="why-us-section" class="mt-16 border-t border-gray-100 pt-12 pb-4">
                         <h2 class="mb-12 text-center text-3xl font-bold text-[#5bc0de]">Почему Topriding.kg?</h2>
 
                         <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 text-center">
