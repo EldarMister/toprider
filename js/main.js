@@ -39,7 +39,7 @@ let filterState = {
 
 // Пагинация и отображение
 let currentPage = 1;
-let itemsPerPage = 20;
+const itemsPerPage = 4; // User requested strict 4 items per page
 let viewMode = 'grid'; // 'grid' or 'list'
 let sortBy = 'newest'; // 'newest', 'price-asc', 'price-desc', 'name-asc'
 
@@ -64,8 +64,15 @@ function loadCart() {
 document.addEventListener('DOMContentLoaded', () => {
     // Загружаем товары из глобальной переменной products (из products.js)
     if (typeof products !== 'undefined') {
-        allProducts = products;
-        filteredProducts = products;
+        // Загружаем и дедуплицируем товары (на случай дублей в products.js)
+        const uniqueIds = new Set();
+        allProducts = products.filter(p => {
+            if (uniqueIds.has(p.id)) return false;
+            uniqueIds.add(p.id);
+            return true;
+        });
+        filteredProducts = allProducts;
+        console.log('Loaded products:', allProducts.length);
     }
 
     // Загружаем корзину из localStorage
@@ -690,20 +697,10 @@ function applyFilters() {
     // Сбрасываем на первую страницу при изменении фильтров
     currentPage = 1;
 
-    // Set itemsPerPage based on category
     // Treat null/undefined/empty category as 'all'
     if (!filterState.category) filterState.category = 'all';
 
-    const isHomePage = filterState.category === 'all';
-    if (isHomePage) {
-        itemsPerPage = 4;
-    } else {
-        const itemsPerPageSelect = document.querySelector('select[data-items-per-page]');
-        itemsPerPage = itemsPerPageSelect ? parseInt(itemsPerPageSelect.value) : 12;
-    }
-
-    renderProducts(filtered);
-    renderPagination(filtered.length);
+    render();
 
     // Обновляем заголовок на основе категории
     const title = document.getElementById('page-title');
@@ -1291,25 +1288,23 @@ function sortProducts(products, sortType) {
 }
 
 // Рендер грида товаров
-function renderProducts(allProductsToRender) { // Renamed argument to emphasize it's the full list
+function renderProducts() {
     const container = document.getElementById('products-grid');
     if (!container) return;
 
+    container.innerHTML = '';
+
+    const allProductsToRender = filteredProducts;
     if (!allProductsToRender || allProductsToRender.length === 0) {
         container.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">Товары не найдены</div>';
         // renderPagination(0); // Called separately in applyFilters/setItemsPerPage
         return;
     }
 
-    // Calculate total pages and validate currentPage
-    const totalPages = Math.ceil(allProductsToRender.length / itemsPerPage);
-    if (currentPage > totalPages) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-
     // Применяем пагинацию
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const paginatedProducts = allProductsToRender.slice(startIndex, endIndex);
+    const visibleItems = allProductsToRender.slice(startIndex, endIndex);
 
     // Применяем вид отображения
     if (viewMode === 'list') {
@@ -1328,7 +1323,7 @@ function renderProducts(allProductsToRender) { // Renamed argument to emphasize 
 
     let finalHtml = '';
 
-    paginatedProducts.forEach((product, index) => {
+    visibleItems.forEach((product, index) => {
         // globalIndex helps track overall position if needed, but for banner logic on *page* index 
         // we might stick to local 'index'. User asked: "banner after 2nd item on homepage".
         // This implies visual position 2 on the current page.
@@ -1419,7 +1414,7 @@ function renderProducts(allProductsToRender) { // Renamed argument to emphasize 
         // Insert banner after every 4th item for other categories (if needed, or simplify)
         // Keeping it consistent with previous requests: only homepage gets special 2nd item banner
         // If categories use different logic:
-        if (filterState.category !== 'all' && viewMode === 'grid' && (index + 1) % 4 === 0 && (index + 1) < paginatedProducts.length) {
+        if (filterState.category !== 'all' && viewMode === 'grid' && (index + 1) % 4 === 0 && (index + 1) < visibleItems.length) {
             finalHtml += bannerHtml;
         }
     });
@@ -1433,8 +1428,7 @@ function goToPage(page) {
     if (page < 1 || page > totalPages) return;
 
     currentPage = page;
-    renderProducts(filteredProducts);
-    renderPagination(filteredProducts.length);
+    render();
 
     // Скролл к началу списка товаров
     const grid = document.getElementById('products-grid');
@@ -1446,73 +1440,66 @@ window.goToPage = goToPage;
 
 // Пагинация: Рендер пагинации
 // Пагинация: Рендер пагинации
-function renderPagination(totalItems) {
+function renderPagination(totalPages) {
     const paginationContainer = document.querySelector('.mt-12.flex.items-center.justify-center.gap-2');
+
+    // Safety check if container exists
     if (!paginationContainer) return;
 
-    if (totalItems === 0) {
-        paginationContainer.innerHTML = '';
+    // Clear existing pagination
+    paginationContainer.innerHTML = '';
+
+    const totalItems = filteredProducts.length;
+
+    // Hide if 0 or 1 page
+    if (totalItems === 0 || totalPages <= 1) {
         paginationContainer.style.display = 'none';
         return;
     }
 
-    const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-    // If only 1 page (or less), hide pagination
-    if (totalPages <= 1) {
-        paginationContainer.innerHTML = '';
-        paginationContainer.style.display = 'none';
-        return;
-    }
-
+    // Ensure container is visible
     paginationContainer.style.display = 'flex';
-    let paginationHtml = '';
+    paginationContainer.style.removeProperty('display'); // Reset any inline 'none' causing issues
 
-    // Кнопка "Предыдущая"
-    if (currentPage > 1) {
-        paginationHtml += `<a href="#" onclick="event.preventDefault(); goToPage(${currentPage - 1})" class="ml-4 text-sm font-bold text-[#00a0a0] hover:text-[#008080] uppercase">ПРЕДЫДУЩИЙ</a>`;
-    } else {
-        paginationHtml += `<span class="ml-4 text-sm font-bold text-gray-300 uppercase cursor-not-allowed">ПРЕДЫДУЩИЙ</span>`;
-    }
+    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-    // Номера страниц
-    const maxVisible = 5;
-    let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+    pages.forEach((pageNumber) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
 
-    if (endPage - startPage < maxVisible - 1) {
-        startPage = Math.max(1, endPage - maxVisible + 1);
-    }
+        const isActive = pageNumber === currentPage;
+        let classes = 'flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold transition-colors';
+        classes += isActive ? ' bg-[#00a0a0] text-white' : ' text-gray-600 hover:bg-gray-100';
 
-    if (startPage > 1) {
-        paginationHtml += `<a href="#" onclick="event.preventDefault(); goToPage(1)" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">1</a>`;
-        if (startPage > 2) {
-            paginationHtml += `<span class="flex h-10 w-10 items-center justify-center text-sm text-gray-400">...</span>`;
+        btn.className = classes;
+        btn.textContent = pageNumber;
+
+        if (!isActive) {
+            btn.addEventListener('click', () => {
+                currentPage = pageNumber;
+                render();
+                const grid = document.getElementById('products-grid');
+                if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         }
-    }
 
-    for (let i = startPage; i <= endPage; i++) {
-        const isActive = i === currentPage;
-        paginationHtml += `<a href="#" onclick="event.preventDefault(); goToPage(${i})" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold ${isActive ? 'bg-[#00a0a0] text-white' : 'text-gray-600 hover:bg-gray-100'}">${i}</a>`;
-    }
-
-    if (endPage < totalPages) {
-        if (endPage < totalPages - 1) {
-            paginationHtml += `<span class="flex h-10 w-10 items-center justify-center text-sm text-gray-400">...</span>`;
-        }
-        paginationHtml += `<a href="#" onclick="event.preventDefault(); goToPage(${totalPages})" class="flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-gray-600 hover:bg-gray-100">${totalPages}</a>`;
-    }
-
-    // Кнопка "Следующая"
-    if (currentPage < totalPages) {
-        paginationHtml += `<a href="#" onclick="event.preventDefault(); goToPage(${currentPage + 1})" class="ml-4 text-sm font-bold text-[#00a0a0] hover:text-[#008080] uppercase">СЛЕДУЮЩИЙ</a>`;
-    } else {
-        paginationHtml += `<span class="ml-4 text-sm font-bold text-gray-300 uppercase cursor-not-allowed">СЛЕДУЮЩИЙ</span>`;
-    }
-
-    paginationContainer.innerHTML = paginationHtml;
+        paginationContainer.appendChild(btn);
+    });
 }
 
+
+function render() {
+    const totalItems = filteredProducts.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    if (currentPage > totalPages) {
+        currentPage = Math.max(1, totalPages);
+    }
+    if (currentPage < 1) currentPage = 1;
+
+    renderProducts();
+    renderPagination(totalPages);
+}
 // Переключение вида отображения (Grid/List)
 function setViewMode(mode) {
     viewMode = mode;
@@ -1535,7 +1522,7 @@ function setViewMode(mode) {
         }
     }
 
-    renderProducts(filteredProducts);
+    render();
 }
 window.setViewMode = setViewMode;
 
@@ -1557,10 +1544,8 @@ function setupViewControls() {
 
 // Обработчик изменения количества товаров на странице
 function setItemsPerPage(count) {
-    itemsPerPage = parseInt(count);
     currentPage = 1;
-    renderProducts(filteredProducts);
-    renderPagination(filteredProducts.length);
+    render();
 
     // Обновляем текст "Показано X товаров"
     const countEl = document.querySelector('.text-sm.text-gray-400.pl-2');
