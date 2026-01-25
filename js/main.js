@@ -689,8 +689,23 @@ function applyFilters() {
     // Сбрасываем на первую страницу при изменении фильтров
     currentPage = 1;
 
+    // Set itemsPerPage based on category
+    const isHomePage = filterState.category === 'all';
+    if (isHomePage) {
+        itemsPerPage = 4;
+    } else {
+        const itemsPerPageSelect = document.querySelector('select[data-items-per-page]');
+        itemsPerPage = itemsPerPageSelect ? parseInt(itemsPerPageSelect.value) : 12;
+    }
+
     renderProducts(filtered);
-    renderPagination(filtered.length);
+
+    // Ensure pagination is visible
+    const paginationContainer = document.querySelector('.mt-12.flex.items-center.justify-center.gap-2');
+    if (paginationContainer) {
+        paginationContainer.style.display = 'flex';
+        renderPagination(filtered.length);
+    }
 
     // Обновляем заголовок на основе категории
     const title = document.getElementById('page-title');
@@ -703,9 +718,9 @@ function applyFilters() {
     if (breadcrumbCurrent) {
         breadcrumbCurrent.textContent = getCategoryName(filterState.category);
     }
-    if (underline) {
-        underline.classList.toggle('hidden', filterState.category !== 'all');
-    }
+    // if (underline) {
+    //     underline.classList.toggle('hidden', filterState.category !== 'all');
+    // }
 
     // Обновляем текст "Показано X товаров"
     const countEl = document.querySelector('.text-sm.text-gray-400.pl-2');
@@ -741,13 +756,18 @@ function showHome() {
     if (categoriesGrid) categoriesGrid.classList.remove('hidden');
     if (productsGrid) productsGrid.classList.remove('hidden');
     if (breadcrumbs) breadcrumbs.classList.add('hidden');
-    if (underline) underline.classList.remove('hidden');
+    // if (underline) underline.classList.remove('hidden'); // Removed title underline
     if (sidebar) sidebar.classList.add('hidden');
+
+    // Show reviews on home
+    const reviewsSection = document.getElementById('reviews-section');
+    if (reviewsSection) reviewsSection.classList.remove('hidden');
 
     // Сбросить фильтр категории и обновить отображение
     filterState.category = 'all';
     currentPage = 1;
-    initializeAllFilters();
+    // initializeAllFilters(); // Это не нужно вызывать здесь, фильтры и так инициализированы
+    applyFilters();
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -773,6 +793,10 @@ function showCatalog() {
     if (productsGrid) productsGrid.classList.remove('hidden');
     if (breadcrumbs) breadcrumbs.classList.remove('hidden');
     if (sidebar) sidebar.classList.remove('hidden');
+
+    // Hide reviews in catalog
+    const reviewsSection = document.getElementById('reviews-section');
+    if (reviewsSection) reviewsSection.classList.add('hidden');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -1333,9 +1357,14 @@ function renderProducts(productsToRender) {
 
         finalHtml += productHtml;
 
-        // Insert banner after every 4th item (index 3, 7, 11...)
+        // Insert banner after 2nd item on homepage
+        if (filterState.category === 'all' && viewMode === 'grid' && (index + 1) === 2) {
+            finalHtml += bannerHtml;
+        }
+
+        // Insert banner after every 4th item (index 3, 7, 11...) for other pages
         // Только для grid view и только если не последний элемент на странице
-        if (viewMode === 'grid' && (globalIndex + 1) % 4 === 0 && (globalIndex + 1) < productsToRender.length) {
+        if (filterState.category !== 'all' && viewMode === 'grid' && (globalIndex + 1) % 4 === 0 && (globalIndex + 1) < productsToRender.length) {
             finalHtml += bannerHtml;
         }
     });
