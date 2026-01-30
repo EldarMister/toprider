@@ -98,6 +98,7 @@ window.editProduct = function (id) {
     document.getElementById('inp-brand').value = product.brand || '';
     document.getElementById('inp-price').value = product.price;
     document.getElementById('inp-oldPrice').value = product.oldPrice || '';
+    document.getElementById('inp-inStock').value = product.inStock === false ? 'false' : 'true';
     document.getElementById('inp-video').value = product.video || '';
     document.getElementById('inp-description').value = product.description || '';
 
@@ -154,6 +155,8 @@ function resetForm() {
     document.getElementById('form-title').innerText = 'Добавить товар';
     document.getElementById('edit-id').value = '';
     document.getElementById('product-form').reset();
+    const inStockSelect = document.getElementById('inp-inStock');
+    if (inStockSelect) inStockSelect.value = 'true';
     clearSpecs();
     clearFullSpecs();
 
@@ -410,6 +413,7 @@ document.getElementById('product-form').addEventListener('submit', function (e) 
     const brand = document.getElementById('inp-brand').value;
     const price = parseInt(document.getElementById('inp-price').value);
     const oldPrice = document.getElementById('inp-oldPrice').value ? parseInt(document.getElementById('inp-oldPrice').value) : null;
+    const inStock = document.getElementById('inp-inStock').value === 'true';
     const video = document.getElementById('inp-video').value;
     const description = document.getElementById('inp-description').value;
 
@@ -441,6 +445,7 @@ document.getElementById('product-form').addEventListener('submit', function (e) 
             product.brand = brand;
             product.price = price;
             product.oldPrice = oldPrice;
+            product.inStock = inStock;
             product.image = image;
             product.images = images;
             product.video = video || undefined;
@@ -469,7 +474,7 @@ document.getElementById('product-form').addEventListener('submit', function (e) 
             rating: 0,
             reviews: 0,
             isNew: true,
-            inStock: true
+            inStock
         };
         if (fullSpecs) {
             newProduct.fullSpecs = fullSpecs;

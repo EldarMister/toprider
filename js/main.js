@@ -1088,6 +1088,10 @@ function renderProductPage(product, container, isModal = false) {
     `;
 
     const wrapperClass = isModal ? 'p-6 lg:p-10' : 'container-custom';
+    const isInStock = product.inStock !== false;
+    const availabilityHtml = isInStock
+        ? '<div class="text-green-600 font-bold mb-6 flex items-center gap-2"><span class="w-2 h-2 bg-green-600 rounded-full"></span> В наличии</div>'
+        : '<div class="text-orange-500 font-bold mb-6 flex items-center gap-2"><span class="w-2 h-2 bg-orange-500 rounded-full"></span> На заказ</div>';
 
     container.innerHTML = `
         <div class="${wrapperClass}">
@@ -1120,7 +1124,7 @@ function renderProductPage(product, container, isModal = false) {
                         ${product.oldPrice ? `<span class="text-xl text-gray-400 line-through">${product.oldPrice.toLocaleString()} сом</span>` : ''}
                     </div>
 
-                    ${product.inStock ? '<div class="text-green-600 font-bold mb-6 flex items-center gap-2"><span class="w-2 h-2 bg-green-600 rounded-full"></span> In Stock</div>' : ''}
+                    ${availabilityHtml}
 
                     ${product.brand ? `<div class="mb-6"><span class="text-2xl font-black text-gray-900 italic">${product.brand}</span></div>` : ''}
 
@@ -1328,11 +1332,6 @@ function renderProducts() {
         // we might stick to local 'index'. User asked: "banner after 2nd item on homepage".
         // This implies visual position 2 on the current page.
 
-        const rating = Math.round(product.rating || 0);
-        const stars = Array(5).fill(0).map((_, i) =>
-            `<svg class="w-3 h-3 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}" ${i < rating ? 'fill="currentColor"' : ''} viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>`
-        ).join('');
-
         // Получаем массив изображений товара
         const productImages = product.images && product.images.length > 0 ? product.images : [product.image];
         const hasMultipleImages = productImages.length > 1;
@@ -1368,13 +1367,7 @@ function renderProducts() {
                 <div class="mb-0.5 text-[9px] text-gray-500 uppercase tracking-wider text-center">${getCategoryName(product.category)}</div>
                 
                 <!-- Title -->
-                <h3 class="text-[12px] font-medium text-gray-900 mb-1 leading-tight line-clamp-2 min-h-[32px] text-center">${product.title}</h3>
-                
-                <!-- Rating -->
-                <div class="flex items-center justify-center gap-1 mb-1">
-                    ${stars}
-                    <span class="text-[9px] text-gray-400">(${product.reviews || 0})</span>
-                </div>
+                <h3 class="text-[12px] font-medium text-gray-900 mb-1 leading-tight line-clamp-2 text-center">${product.title}</h3>
                 
                 <!-- Price -->
                 <div class="mb-2 text-center">
