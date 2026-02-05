@@ -142,6 +142,47 @@
             background-color: var(--card-bg-hover);
         }
 
+        /* Reusable hover card effect for other blocks (promo, акции, etc.) */
+        .ui-hover-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-color: var(--card-border-color);
+            background: var(--card-bg);
+            transform: translateY(0);
+            transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+
+        .ui-hover-card:hover,
+        .ui-hover-card:focus-visible,
+        .ui-hover-card:focus-within {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            background: var(--card-bg-hover);
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Catalog categories tiles hover */
+        #categories-grid > div {
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        #categories-grid > div > div:first-child {
+            border: 1px solid var(--card-border-color);
+            background: #f5f5f5;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        #categories-grid > div:hover {
+            transform: translateY(-5px);
+        }
+
+        #categories-grid > div:hover > div:first-child {
+            border-color: var(--primary-color);
+            background: #ffffff;
+        }
+
         /* Product card is a direct child of grid */
         #products-grid .product-card {
             display: flex !important;
@@ -596,7 +637,7 @@
 
     <!-- Promo Banner -->
     <section class="container-custom mt-4 mb-0 md:my-8 px-4 md:px-0">
-        <div class="w-full relative rounded-lg overflow-hidden shadow-md">
+        <div class="ui-hover-card w-full relative rounded-lg overflow-hidden shadow-md">
             <img id="main-banner-img" src="assets/images/banner.png" alt="Рекламный баннер"
                 class="w-full h-auto object-cover">
         </div>
@@ -1549,7 +1590,7 @@
         </div>
         <!-- Banner -->
         <div
-            class="w-full h-[300px] md:h-[450px] lg:h-[500px] rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+            class="ui-hover-card w-full h-[300px] md:h-[450px] lg:h-[500px] rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
             <img id="promo-banner-img" src="assets/images/promotion_banner.png" alt="Акция"
                 class="w-full h-full object-cover">
         </div>
